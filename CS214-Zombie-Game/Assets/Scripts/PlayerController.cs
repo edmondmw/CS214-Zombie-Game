@@ -9,12 +9,15 @@ public class PlayerController : MonoBehaviour {
 
     Rigidbody rb;
     bool grounded = true;
+    Animator anim;
 
 	void Start ()
     {
         // Makes cursor disappear
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
+        // TODO: temporary maybe move to another script
+        anim = transform.Find("Camera").Find("Sword").GetComponent<Animator>();
 	}
 
     private void FixedUpdate()
@@ -33,6 +36,11 @@ public class PlayerController : MonoBehaviour {
         horizontal *= Time.deltaTime;
 
         transform.Translate(horizontal, 0, vertical);
+
+        if(Input.GetButtonDown("Fire1"))
+        {
+            anim.SetTrigger("attack");
+        }
 
         // Unlock the cursor when esc is pressed
         if(Input.GetKeyDown(KeyCode.Escape))
