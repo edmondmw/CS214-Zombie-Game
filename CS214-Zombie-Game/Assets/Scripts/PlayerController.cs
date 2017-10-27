@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         // TODO: temporary maybe move to another script
-        anim = transform.Find("Camera").Find("Sword").GetComponent<Animator>();
+        anim = transform.Find("MainCamera").Find("Sword").GetComponent<Animator>();
 	}
 
     private void FixedUpdate()
