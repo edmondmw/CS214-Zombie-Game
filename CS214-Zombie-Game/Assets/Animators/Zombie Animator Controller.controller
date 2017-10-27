@@ -8,12 +8,6 @@ AnimatorController:
   m_Name: Zombie Animator Controller
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: deadStyle
-    m_Type: 3
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: isAttack
     m_Type: 4
     m_DefaultFloat: 0
@@ -320,22 +314,22 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 1102888268890935850}
     m_Position: {x: 564, y: 72, z: 0}
-  m_ChildStateMachines:
   - serializedVersion: 1
-    m_StateMachine: {fileID: 1107708112504551640}
-    m_Position: {x: 312, y: -24, z: 0}
+    m_State: {fileID: 1102895445343078262}
+    m_Position: {x: 300, y: -24, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102958393681488438}
+    m_Position: {x: 540, y: -24, z: 0}
+  m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
     data:
-      first: {fileID: 1107708112504551640}
-      second:
-      - {fileID: 1109629358890527900}
-      - {fileID: 1109690238989438200}
-      - {fileID: 1109644836428605630}
+      first: {fileID: 0}
+      second: []
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 420, y: -72, z: 0}
-  m_EntryPosition: {x: 72, y: -12, z: 0}
+  m_AnyStatePosition: {x: 528, y: -96, z: 0}
+  m_EntryPosition: {x: 84, y: -24, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102895445343078262}
@@ -366,75 +360,3 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 576, y: 108, z: 0}
   m_ParentStateMachinePosition: {x: 552, y: -120, z: 0}
   m_DefaultState: {fileID: 1102748345975370540}
---- !u!1107 &1107708112504551640
-AnimatorStateMachine:
-  serializedVersion: 5
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: Action
-  m_ChildStates:
-  - serializedVersion: 1
-    m_State: {fileID: 1102895445343078262}
-    m_Position: {x: 264, y: 60, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 1102958393681488438}
-    m_Position: {x: 396, y: -12, z: 0}
-  m_ChildStateMachines: []
-  m_AnyStateTransitions: []
-  m_EntryTransitions: []
-  m_StateMachineTransitions: {}
-  m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 576, y: 108, z: 0}
-  m_ParentStateMachinePosition: {x: 552, y: -120, z: 0}
-  m_DefaultState: {fileID: 1102895445343078262}
---- !u!1109 &1109629358890527900
-AnimatorTransition:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: deadStyle
-    m_EventTreshold: 1
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1102913013184114722}
-  m_Solo: 1
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 1
---- !u!1109 &1109644836428605630
-AnimatorTransition:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: deadStyle
-    m_EventTreshold: 3
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1102888268890935850}
-  m_Solo: 1
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 1
---- !u!1109 &1109690238989438200
-AnimatorTransition:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: deadStyle
-    m_EventTreshold: 2
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1102622798808120498}
-  m_Solo: 1
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 1

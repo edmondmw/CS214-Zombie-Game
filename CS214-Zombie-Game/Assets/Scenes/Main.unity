@@ -310,6 +310,7 @@ MonoBehaviour:
   maxAttackDistance: 2
   turnSpeed: 0.01
   hp: 100
+  disappearTime: 10
 --- !u!54 &604702322
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -323,7 +324,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &604702323
 CapsuleCollider:
@@ -450,7 +451,7 @@ Prefab:
       objectReference: {fileID: 9100000, guid: 4d3ae58aad5436348ab972a8f00beae4, type: 2}
     - target: {fileID: 9500000, guid: 8141a1e3f5562ba4d910d6c02d5d213c, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: 8141a1e3f5562ba4d910d6c02d5d213c, type: 3}
       propertyPath: m_UpdateMode
