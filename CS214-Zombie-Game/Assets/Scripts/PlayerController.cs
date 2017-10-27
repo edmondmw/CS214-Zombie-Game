@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         // TODO: temporary maybe move to another script
-        anim = transform.Find("MainCamera").Find("Sword").GetComponent<Animator>();
+        anim = transform.Find("MainCamera").Find("Arms05").GetComponent<Animator>();
 	}
 
     private void FixedUpdate()
@@ -39,7 +39,10 @@ public class PlayerController : MonoBehaviour {
 
         if(Input.GetButtonDown("Fire1"))
         {
-            anim.SetTrigger("attack");
+            anim.SetBool("Swing01",true);
+        } else
+        {
+            anim.SetBool("Swing01", false);
         }
 
         // Unlock the cursor when esc is pressed
