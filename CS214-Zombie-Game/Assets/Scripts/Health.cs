@@ -8,6 +8,7 @@ public class Health : MonoBehaviour {
     public Text healthText;
 
     public int currentHealth = maxHealth;
+
     private void Awake()
     {
         if(healthText != null)
