@@ -6,18 +6,23 @@ public class PlayerController : MonoBehaviour {
 
     public float speed = 10.0f;
     public float jumpForce = 10f;
+    public int damage = 20;
+    public float hitRange = 1.5f;
+    public float attackDelay = 1f;
 
+    float nextAttack;
     Rigidbody rb;
     bool grounded = true;
+    bool alternateSwingAnim = true;
     Animator anim;
-
+    
 	void Start ()
     {
         // Makes cursor disappear
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
-        // TODO: temporary maybe move to another script
-        anim = transform.Find("MainCamera").Find("Arms05").GetComponent<Animator>();
+        anim = transform.Find("MainCamera").Find("Arms").GetComponent<Animator>();
+        nextAttack = Time.time;
 	}
 
     private void FixedUpdate()
@@ -30,6 +35,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update ()
     {
+        // For movement
         float vertical = Input.GetAxis("Vertical") * speed;
         float horizontal = Input.GetAxis("Horizontal") * speed;
         vertical *= Time.deltaTime;
@@ -37,16 +43,18 @@ public class PlayerController : MonoBehaviour {
 
         transform.Translate(horizontal, 0, vertical);
 
+        // Attacking
         if(Input.GetButtonDown("Fire1"))
         {
-            anim.SetBool("Swing01",true);
-        } else
-        {
-            anim.SetBool("Swing01", false);
+            if (Time.time >= nextAttack)
+            {
+                nextAttack = Time.time + attackDelay;
+                StartCoroutine(Attack());
+            }
         }
-
+  
         // Unlock the cursor when esc is pressed
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
         }
@@ -66,5 +74,34 @@ public class PlayerController : MonoBehaviour {
         {
             grounded = false;
         }
+    }
+
+    IEnumerator Attack()
+    {
+        if (alternateSwingAnim)
+        {
+            anim.SetTrigger("Swing01");
+        }
+        else
+        {
+            anim.SetTrigger("Swing02");
+        }
+        alternateSwingAnim = !alternateSwingAnim;
+        
+        // Don't want to apply damage until after animation has played a bit
+        yield return new WaitForSeconds(attackDelay);
+
+        RaycastHit hit;
+        Vector3 rayOrigin = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+
+        if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, hitRange))
+        {
+            if(hit.transform.CompareTag("Enemy"))
+            {
+                hit.transform.GetComponent<Health>().TakeDamage(damage);
+                Debug.Log(hit.transform.GetComponent<Health>().currentHealth);
+            }
+        }
+
     }
 }
