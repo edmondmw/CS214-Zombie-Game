@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MouseLook : MonoBehaviour {
+
+public class MouseLook : NetworkBehaviour {
 
     public float sensitivity = 5.0f;
     public float smoothing = 2.0f;
@@ -20,6 +22,9 @@ public class MouseLook : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if (!isLocalPlayer)
+            return;
+
         Vector2 mouseDir = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
         smoothVector.x = Mathf.Lerp(smoothVector.x, mouseDir.x, 1f / smoothing);
         smoothVector.y = Mathf.Lerp(smoothVector.y, mouseDir.y, 1f / smoothing);
