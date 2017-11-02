@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class MouseLook : NetworkBehaviour {
+public class MouseLook : MonoBehaviour {
 
     public float sensitivity = 5.0f;
     public float smoothing = 2.0f;
@@ -18,14 +18,14 @@ public class MouseLook : NetworkBehaviour {
 	void Start ()
     {
         character = this.transform.parent.gameObject;
-        netID = GetComponentInParent<NetworkIdentity>();
+       // netID = GetComponentInParent<NetworkIdentity>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (netID != null && !netID.isLocalPlayer)
-            return;
+       // if (netID != null && !netID.isLocalPlayer)
+         //   return;
 
         Vector2 mouseDir = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
         smoothVector.x = Mathf.Lerp(smoothVector.x, mouseDir.x, 1f / smoothing);
