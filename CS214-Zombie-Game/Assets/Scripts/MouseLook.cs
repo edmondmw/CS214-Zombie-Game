@@ -12,17 +12,19 @@ public class MouseLook : NetworkBehaviour {
     Vector2 mouseLook;
     Vector2 smoothVector;
     GameObject character;
+    NetworkIdentity netID;
 
 	// Use this for initialization
 	void Start ()
     {
-        character = this.transform.parent.gameObject;	
+        character = this.transform.parent.gameObject;
+        netID = GetComponentInParent<NetworkIdentity>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (!isLocalPlayer)
+        if (netID != null && !netID.isLocalPlayer)
             return;
 
         Vector2 mouseDir = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
