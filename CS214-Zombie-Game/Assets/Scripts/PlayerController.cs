@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
     float nextAttack;
     Rigidbody rb;
     bool isSprinting = false;
-    bool grounded = false;
+    bool grounded = true;
     bool alternateSwingAnim = true;
     Animator anim;
     
