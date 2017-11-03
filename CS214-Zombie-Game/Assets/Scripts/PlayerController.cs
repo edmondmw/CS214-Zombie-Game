@@ -103,8 +103,9 @@ public class PlayerController : MonoBehaviour {
         {
             if(hit.transform.CompareTag("Enemy"))
             {
-                hit.transform.GetComponent<Health>().TakeDamage(damage);
-                Debug.Log(hit.transform.GetComponent<Health>().currentHealth);
+				// TODO: Make health an abstract class and zombie health a child
+                hit.transform.GetComponent<ZombieHealth>().TakeDamage(damage);
+				Debug.Log(hit.transform.GetComponent<ZombieHealth>().currentHealth);
             }
         }
     }
