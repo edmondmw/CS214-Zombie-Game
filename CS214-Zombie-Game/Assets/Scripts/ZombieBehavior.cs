@@ -13,21 +13,20 @@ public class ZombieBehavior : MonoBehaviour
 	public float maxAttackDistance = 2.5f;
 	public float turnSpeed = 0.01f;
 
-
 	private float distanceFromPlayer;
-	private Animator anim;
 	//private Rigidbody rb;
 	private ZombieHealth health;
-	private int attackHash = Animator.StringToHash ("isAttack");
-	private bool isAttacking;
+	private ZombieAttack attack;
+
+
 
 
 	// Use this for initialization
 	void Start ()
 	{
-		//rb=GetComponent<Rigidbody>();
-		anim = GetComponent<Animator> ();
+
 		health = GetComponent<ZombieHealth> ();
+		attack = GetComponentInChildren<ZombieAttack> ();
 	}
 
 	// Update is called once per frame
@@ -36,7 +35,7 @@ public class ZombieBehavior : MonoBehaviour
 		if (health.currentHealth > 0) {
 			playerPosition = player.transform.position;
 			distanceFromPlayer = Vector3.Distance (playerPosition, transform.position);
-
+			bool isAttacking = attack.isAttacking;
 			if (distanceFromPlayer <= detectableRange) {
 				Search (playerPosition);
 				if (distanceFromPlayer > attackDistance && !isAttacking) {
@@ -44,10 +43,10 @@ public class ZombieBehavior : MonoBehaviour
 				}
 
 				if (distanceFromPlayer <= attackDistance) {
-					Attack (true);
+					attack.Attack (true);
 				}
 				if (isAttacking && distanceFromPlayer > maxAttackDistance) {
-					Attack (false);
+					attack.Attack (false);
 					Move ();
 				}
 			}
@@ -69,11 +68,6 @@ public class ZombieBehavior : MonoBehaviour
 		transform.Translate (new Vector3 (0, 0, moveSpeed));
 	}
 
-	void Attack (bool isAttack)
-	{
-		anim.SetBool (attackHash, isAttack);
-		isAttacking = isAttack;
-	}
 
 
 

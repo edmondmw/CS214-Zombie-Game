@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641228, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657922, g: 0.4964134, b: 0.5748175, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -91,6 +91,36 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &10381376 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1167452144536218, guid: 5282c48e3e5366d43970d5eb34d9d534,
+    type: 2}
+  m_PrefabInternal: {fileID: 554013764}
+--- !u!114 &10381378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 10381376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026d5569e3ae1fd478e13c45ef99b3cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  isAttacking: 0
+--- !u!65 &10381379
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 10381376}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.21817744, y: 0.16257997, z: 0.17317475}
+  m_Center: {x: -0.306736, y: 0.04122989, z: 0.058647856}
 --- !u!1 &364516345 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1503048170845164, guid: e97ca947258652541a49201d6094bfbd,
@@ -208,6 +238,66 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 364516345}
+    - target: {fileID: 114557830471872964, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 137503420372952446, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: m_AABB.m_Center.y
+      value: 0.041473877
+      objectReference: {fileID: 0}
+    - target: {fileID: 137503420372952446, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: m_AABB.m_Center.z
+      value: 0.05598945
+      objectReference: {fileID: 0}
+    - target: {fileID: 137503420372952446, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.11845094
+      objectReference: {fileID: 0}
+    - target: {fileID: 137503420372952446, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: m_AABB.m_Extent.z
+      value: 0.086404555
+      objectReference: {fileID: 0}
+    - target: {fileID: 137503420372952446, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: m_AABB.m_Center.x
+      value: -0.31831044
+      objectReference: {fileID: 0}
+    - target: {fileID: 137503420372952446, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.081044
+      objectReference: {fileID: 0}
+    - target: {fileID: 137284073864497774, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: m_AABB.m_Center.x
+      value: -0.5289111
+      objectReference: {fileID: 0}
+    - target: {fileID: 137284073864497774, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: m_AABB.m_Extent.x
+      value: 0.13286847
+      objectReference: {fileID: 0}
+    - target: {fileID: 137284073864497774, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: m_AABB.m_Center.y
+      value: -0.20172486
+      objectReference: {fileID: 0}
+    - target: {fileID: 137284073864497774, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: m_AABB.m_Extent.y
+      value: 0.06574264
+      objectReference: {fileID: 0}
+    - target: {fileID: 114035877195016986, guid: 5282c48e3e5366d43970d5eb34d9d534,
+        type: 2}
+      propertyPath: hitBackward
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5282c48e3e5366d43970d5eb34d9d534, type: 2}
   m_IsPrefabParent: 0
@@ -442,6 +532,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 810062136}
+--- !u!1 &863199118 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1392215612445628, guid: 5282c48e3e5366d43970d5eb34d9d534,
+    type: 2}
+  m_PrefabInternal: {fileID: 554013764}
+--- !u!114 &863199120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 863199118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026d5569e3ae1fd478e13c45ef99b3cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  isAttacking: 0
+--- !u!65 &863199121
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 863199118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.22945511, y: 0.12652685, z: 0.18100846}
+  m_Center: {x: -0.5467212, y: -0.20127684, z: -0.055612385}
 --- !u!1 &1164910303
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +762,10 @@ Prefab:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1155420585989412, guid: e97ca947258652541a49201d6094bfbd, type: 2}
+      propertyPath: m_TagString
+      value: Body
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e97ca947258652541a49201d6094bfbd, type: 2}
   m_IsPrefabParent: 0
@@ -752,3 +876,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6827210c885a24ab5a3c0518c2cbf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2094543062 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1155420585989412, guid: e97ca947258652541a49201d6094bfbd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1854786386}
+--- !u!136 &2094543066
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2094543062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -8,15 +8,19 @@ public class ZombieHealth : MonoBehaviour
 	public int startingHealth = 100;
 	public int currentHealth;
 	public float disappearTime = 10;
+    public float hitBackward=5f;
 
 	private Animator anim;
 	private bool isChangeColor;
-	private bool isDead;
+    private Rigidbody rb;
+
 
 	public void Awake()
 	{
+        rb = GetComponent <Rigidbody> ();
 		anim = GetComponent<Animator>();
 		currentHealth = startingHealth;
+
 	}
 
 	//Play a random dead animation and destroy the zombie after disappearTime.
@@ -40,43 +44,31 @@ public class ZombieHealth : MonoBehaviour
 		Destroy(gameObject, disappearTime);
 
 	}
+    public void TakeDamage(int damage)
+    {
+        GameObject obj=GameObject.FindGameObjectWithTag ("Player");
+        TakeDamage (damage,obj);
+    }
 
-	public void TakeDamage(int damage)
+    //The zombie moves against the direction of the object ob hit it.
+    public void TakeDamage(int damage,GameObject ob)
 	{
 		currentHealth -= damage;
-		if (currentHealth <= 0)
-		{
-			isDead = true;
-			Death();
+		if (currentHealth <= 0) {
+			Death ();
+		} else {
+            BackwardByHit (ob);
 		}
 	}
-	/*
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Weapon"))
-        {
-            currentHealth -= collision.gameObject.GetComponent<PlayerController>().damage;
 
-            //Color turn red when get hits.
-            StartCoroutine(HitColor());
-        }
+    private void BackwardByHit(GameObject ob)
+    {
+        Vector3 direction = transform.position - ob.transform.position;
+        direction.y = 0;
+        rb.AddForce (direction.normalized*hitBackward,ForceMode.Impulse);
     }
 
-    IEnumerator HitColor()
-    {
-        if (isChangeColor)
-        {
-            yield break;
-        }
-        isChangeColor = true;
 
-        Color originColor =GetComponent<Renderer>().material.color;
-        GetComponent<Renderer>().material.color = Color.red;
-        yield return new WaitForSeconds(0.2f);
-        GetComponent<Renderer>().material.color = originColor;
-        isChangeColor = false;
-
-    }
-    */
+    
 }
 

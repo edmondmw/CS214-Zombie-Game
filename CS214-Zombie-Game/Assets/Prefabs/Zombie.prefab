@@ -68,6 +68,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4162124585996890}
   - component: {fileID: 137503420372952446}
+  - component: {fileID: 65529740364426126}
+  - component: {fileID: 114328372052686424}
   m_Layer: 0
   m_Name: mesh_R_Hand
   m_TagString: Untagged
@@ -116,6 +118,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4611951661220270}
   - component: {fileID: 137284073864497774}
+  - component: {fileID: 65586781413729050}
+  - component: {fileID: 114588251910384342}
   m_Layer: 0
   m_Name: mesh_L_Hand
   m_TagString: Untagged
@@ -569,6 +573,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &65529740364426126
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1167452144536218}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.21817744, y: 0.16257997, z: 0.17317475}
+  m_Center: {x: -0.306736, y: 0.04122989, z: 0.058647856}
+--- !u!65 &65586781413729050
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1392215612445628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.22945511, y: 0.12652685, z: 0.18100846}
+  m_Center: {x: -0.5467212, y: -0.20127684, z: -0.055612385}
 --- !u!95 &95333228014681672
 Animator:
   serializedVersion: 3
@@ -600,6 +628,20 @@ MonoBehaviour:
   startingHealth: 100
   currentHealth: 0
   disappearTime: 10
+  hitBackward: 5
+--- !u!114 &114328372052686424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1167452144536218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026d5569e3ae1fd478e13c45ef99b3cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  isAttacking: 0
 --- !u!114 &114557830471872964
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -612,11 +654,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  moveSpeed: 0.01
+  moveSpeed: 0.03
   detectableRange: 50
   attackDistance: 1.5
   maxAttackDistance: 2
   turnSpeed: 0.4
+--- !u!114 &114588251910384342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1392215612445628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026d5569e3ae1fd478e13c45ef99b3cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  isAttacking: 0
 --- !u!136 &136867607305834342
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -799,8 +854,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -0.54220736, y: -0.20324819, z: -0.053373158}
-    m_Extent: {x: 0.14616483, y: 0.11672999, z: 0.12854916}
+    m_Center: {x: -0.5289111, y: -0.20172486, z: -0.053373158}
+    m_Extent: {x: 0.13286847, y: 0.06574264, z: 0.12854916}
   m_DirtyAABB: 0
 --- !u!137 &137367389290962292
 SkinnedMeshRenderer:
@@ -971,8 +1026,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 0}
   m_AABB:
-    m_Center: {x: -0.29569066, y: 0.02457184, z: 0.0533714}
-    m_Extent: {x: 0.14107074, y: 0.13462019, z: 0.12854916}
+    m_Center: {x: -0.31831044, y: 0.041473877, z: 0.05598945}
+    m_Extent: {x: 0.11845094, y: 0.081044, z: 0.086404555}
   m_DirtyAABB: 0
 --- !u!137 &137554629234348392
 SkinnedMeshRenderer:
