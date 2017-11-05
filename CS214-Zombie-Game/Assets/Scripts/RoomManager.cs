@@ -17,13 +17,27 @@ public class RoomManager : Photon.MonoBehaviour {
         PhotonNetwork.ConnectUsingSettings(versionNum);
         Debug.Log("Starting conn");
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    public void OnJoinedLobby()
     {
+        Debug.Log("joined lobby");
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsVisible = true;
         roomOptions.MaxPlayers = 4;
-        PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, TypedLobby.Default);
-	}
+        PhotonNetwork.JoinOrCreateRoom(roomName, null, null);
+    }
+
+    public void OnJoinedRoom()
+    {
+        Debug.Log("joined room");
+        isConnected = true;
+        SpawnPlayer();
+    }
+
+    public void SpawnPlayer()
+    {
+        GameObject aPlayer = PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0) as GameObject;
+        //aPlayer.GetComponent<PlayerController>().enabled = true;
+        //aPlayer.transform.Find("MainCamera").gameObject.SetActive(true);
+    }
 }
