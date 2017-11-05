@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class NetworkPlayerController : NetworkBehaviour {
+public class NetworkPlayerController : MonoBehaviour
+{
 
     public float walkSpeed = 5f;
     public float sprintSpeed = 10f;
@@ -18,36 +18,45 @@ public class NetworkPlayerController : NetworkBehaviour {
     bool grounded = true;
     bool alternateSwingAnim = true;
     Animator anim;
-    
-	void Start ()
+
+    private void Awake()
+    {
+        PhotonView pv = PhotonView.Get(this);
+        if(!pv.isMine)
+        {
+            //TODO: just disable the whole camera
+            Transform mainCam = transform.Find("MainCamera");
+            mainCam.GetComponent<Camera>().enabled = false;
+            mainCam.GetComponent<MouseLook>().enabled = false;
+            mainCam.Find("DrawAlways").gameObject.SetActive(false);
+            GetComponent<NetworkPlayerController>().enabled = false;
+            
+        }
+    }
+
+    void Start()
     {
         // Makes cursor disappear
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         anim = transform.Find("MainCamera").Find("Arms").GetComponent<Animator>();
         nextAttack = Time.time;
-	}
+    }
 
     private void FixedUpdate()
     {
-        if (!isLocalPlayer)
-            return;
-
         if (Input.GetButtonDown("Jump") && grounded)
         {
             rb.AddForce(0, jumpForce, 0);
         }
     }
 
-    void Update ()
+    void Update()
     {
-        if (!isLocalPlayer)
-            return;
-
         MoveHandler();
 
         // Attacking
-        if(Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             if (Time.time >= nextAttack)
             {
@@ -55,13 +64,13 @@ public class NetworkPlayerController : NetworkBehaviour {
                 StartCoroutine(Attack());
             }
         }
-  
+
         // Unlock the cursor when esc is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
         }
-	}
+    }
 
     void MoveHandler()
     {
@@ -69,7 +78,7 @@ public class NetworkPlayerController : NetworkBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
 
         // Sprinting. Only allow sprinting when going forward
-        if (Input.GetKey(KeyCode.LeftShift) && vertical > 0 )
+        if (Input.GetKey(KeyCode.LeftShift) && vertical > 0)
         {
             vertical *= sprintSpeed;
             anim.SetBool("IsRunning", true);
@@ -80,7 +89,7 @@ public class NetworkPlayerController : NetworkBehaviour {
             vertical *= walkSpeed;
             horizontal *= walkSpeed;
         }
-           
+
         vertical *= Time.deltaTime;
         horizontal *= Time.deltaTime;
 
@@ -99,7 +108,7 @@ public class NetworkPlayerController : NetworkBehaviour {
             anim.SetTrigger("Swing02");
         }
         alternateSwingAnim = !alternateSwingAnim;
-        
+
         // Don't want to apply damage until after animation has played a bit
         yield return new WaitForSeconds(0.5f);
 
@@ -108,7 +117,7 @@ public class NetworkPlayerController : NetworkBehaviour {
 
         if (Physics.Raycast(rayOrigin, Camera.main.transform.forward, out hit, hitRange))
         {
-            if(hit.transform.CompareTag("Enemy"))
+            if (hit.transform.CompareTag("Enemy"))
             {
                 hit.transform.GetComponent<Health>().TakeDamage(damage);
                 Debug.Log(hit.transform.GetComponent<Health>().currentHealth);

@@ -31,13 +31,6 @@ public class RoomManager : Photon.MonoBehaviour {
     {
         Debug.Log("joined room");
         isConnected = true;
-        SpawnPlayer();
-    }
-
-    public void SpawnPlayer()
-    {
-        GameObject aPlayer = PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0) as GameObject;
-        //aPlayer.GetComponent<PlayerController>().enabled = true;
-        //aPlayer.transform.Find("MainCamera").gameObject.SetActive(true);
+        PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
     }
 }
