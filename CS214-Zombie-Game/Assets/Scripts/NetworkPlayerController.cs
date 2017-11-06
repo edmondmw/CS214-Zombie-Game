@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NetworkPlayerController : MonoBehaviour
 {
-
+    
     public float walkSpeed = 5f;
     public float sprintSpeed = 10f;
     public float jumpForce = 10f;
@@ -14,25 +14,10 @@ public class NetworkPlayerController : MonoBehaviour
 
     float nextAttack;
     Rigidbody rb;
-    bool isSprinting = false;
     bool grounded = true;
     bool alternateSwingAnim = true;
     Animator anim;
-
-    private void Awake()
-    {
-        PhotonView pv = PhotonView.Get(this);
-        if(!pv.isMine)
-        {
-            //TODO: just disable the whole camera
-            Transform mainCam = transform.Find("MainCamera");
-            mainCam.GetComponent<Camera>().enabled = false;
-            mainCam.GetComponent<MouseLook>().enabled = false;
-            mainCam.Find("DrawAlways").gameObject.SetActive(false);
-            GetComponent<NetworkPlayerController>().enabled = false;
-            
-        }
-    }
+    Animator graphicsAnim;
 
     void Start()
     {
@@ -40,11 +25,12 @@ public class NetworkPlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         anim = transform.Find("MainCamera").Find("Arms").GetComponent<Animator>();
+        graphicsAnim = transform.Find("Graphic").GetComponent<Animator>();
         nextAttack = Time.time;
     }
 
     private void FixedUpdate()
-    {
+    { 
         if (Input.GetButtonDown("Jump") && grounded)
         {
             rb.AddForce(0, jumpForce, 0);
@@ -140,5 +126,4 @@ public class NetworkPlayerController : MonoBehaviour
             grounded = false;
         }
     }
-
 }
