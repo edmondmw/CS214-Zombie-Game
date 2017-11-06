@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
     public int damage = 20;
     public float hitRange = 1.5f;
     public float attackDelay = 1f;
+    // Used to send over the network
+    public bool isAttacking = false;
 
     float nextAttack;
     Rigidbody rb;
@@ -83,6 +85,7 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Attack()
     {
+        isAttacking = true;
         if (alternateSwingAnim)
         {
             anim.SetTrigger("Swing01");

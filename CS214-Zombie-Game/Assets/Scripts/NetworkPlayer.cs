@@ -5,8 +5,13 @@ using UnityEngine;
 public class NetworkPlayer : Photon.MonoBehaviour {
 
     PhotonView pv;
+    Animator graphicAnim;
     Animator anim;
+    Quaternion realRotation = Quaternion.identity;
+    Vector3 realPosition = Vector3.zero;
     float vertical;
+    bool shouldAttack;
+    bool swing02;
 
     private void Awake()
     {
@@ -14,12 +19,13 @@ public class NetworkPlayer : Photon.MonoBehaviour {
        if(pv.isMine)
         {
             transform.Find("Graphic").gameObject.SetActive(false);
+            anim = transform.Find("MainCamera").Find("Arms").GetComponent<Animator>();
         }
         else
         {
             transform.Find("MainCamera").gameObject.SetActive(false);
             GetComponent<PlayerController>().enabled = false;
-            anim = transform.Find("Graphic").GetComponent<Animator>();
+            graphicAnim = transform.Find("Graphic").GetComponent<Animator>();
         }        
     }
 
@@ -27,10 +33,18 @@ public class NetworkPlayer : Photon.MonoBehaviour {
     {
         if (!pv.isMine)
         {
-            if (anim)
+            if (graphicAnim)
             {
-                anim.SetFloat("InputY", vertical);
+                graphicAnim.SetFloat("InputY", vertical);
+                if(shouldAttack)
+                {
+                    graphicAnim.SetTrigger("Swing01");
+                    shouldAttack = false;
+                }
             }
+
+            transform.position = Vector3.Lerp(transform.position, realPosition, 0.1f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, realRotation, 0.1f);
         }
     }
 
@@ -39,10 +53,17 @@ public class NetworkPlayer : Photon.MonoBehaviour {
         if(stream.isWriting)
         {
             stream.SendNext(Input.GetAxis("Vertical"));
+            stream.SendNext(GetComponent<PlayerController>().isAttacking);
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+            GetComponent<PlayerController>().isAttacking = false;
         }
         else
         {
             vertical = (float)stream.ReceiveNext();
+            shouldAttack = (bool)stream.ReceiveNext();
+            realPosition = (Vector3)stream.ReceiveNext();
+            realRotation = (Quaternion)stream.ReceiveNext();
         }
     }
 }
