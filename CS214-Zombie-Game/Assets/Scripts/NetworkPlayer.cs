@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NetworkPlayer : Photon.MonoBehaviour {
+public class NetworkPlayer : Photon.MonoBehaviour
+{
 
     PhotonView pv;
     Animator graphicAnim;
@@ -10,13 +11,14 @@ public class NetworkPlayer : Photon.MonoBehaviour {
     Quaternion realRotation = Quaternion.identity;
     Vector3 realPosition = Vector3.zero;
     float vertical;
+    float horizontal;
     bool shouldAttack;
     bool swing02;
 
     private void Awake()
     {
         pv = GetComponent<PhotonView>();
-       if(pv.isMine)
+        if (pv.isMine)
         {
             transform.Find("Graphic").gameObject.SetActive(false);
             anim = transform.Find("MainCamera").Find("Arms").GetComponent<Animator>();
@@ -26,7 +28,7 @@ public class NetworkPlayer : Photon.MonoBehaviour {
             transform.Find("MainCamera").gameObject.SetActive(false);
             GetComponent<PlayerController>().enabled = false;
             graphicAnim = transform.Find("Graphic").GetComponent<Animator>();
-        }        
+        }
     }
 
     private void Update()
@@ -36,7 +38,8 @@ public class NetworkPlayer : Photon.MonoBehaviour {
             if (graphicAnim)
             {
                 graphicAnim.SetFloat("InputY", vertical);
-                if(shouldAttack)
+                graphicAnim.SetFloat("InputX", horizontal);
+                if (shouldAttack)
                 {
                     graphicAnim.SetTrigger("Swing01");
                     shouldAttack = false;
@@ -50,9 +53,10 @@ public class NetworkPlayer : Photon.MonoBehaviour {
 
     void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        if(stream.isWriting)
+        if (stream.isWriting)
         {
             stream.SendNext(Input.GetAxis("Vertical"));
+            stream.SendNext(Input.GetAxis("Horizontal"));
             stream.SendNext(GetComponent<PlayerController>().isAttacking);
             stream.SendNext(transform.position);
             stream.SendNext(transform.rotation);
@@ -61,6 +65,7 @@ public class NetworkPlayer : Photon.MonoBehaviour {
         else
         {
             vertical = (float)stream.ReceiveNext();
+            horizontal = (float)stream.ReceiveNext();
             shouldAttack = (bool)stream.ReceiveNext();
             realPosition = (Vector3)stream.ReceiveNext();
             realRotation = (Quaternion)stream.ReceiveNext();
