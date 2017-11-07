@@ -65,8 +65,6 @@ public class NetworkPlayer : Photon.MonoBehaviour
             vertical = (float)stream.ReceiveNext();
             horizontal = (float)stream.ReceiveNext();
             shouldAttack = (bool)stream.ReceiveNext();
-            realPosition = (Vector3)stream.ReceiveNext();
-            realRotation = (Quaternion)stream.ReceiveNext();
         }
     }
 }
