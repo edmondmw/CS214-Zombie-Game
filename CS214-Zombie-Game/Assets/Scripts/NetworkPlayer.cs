@@ -8,8 +8,6 @@ public class NetworkPlayer : Photon.MonoBehaviour
     PhotonView pv;
     Animator graphicAnim;
     Animator anim;
-    Quaternion realRotation = Quaternion.identity;
-    Vector3 realPosition = Vector3.zero;
     float vertical;
     float horizontal;
     bool shouldAttack;

@@ -9,6 +9,7 @@ public class RoomManager : Photon.MonoBehaviour {
     public bool isConnected = false; 
     public Transform spawnPoint;
     public GameObject player;
+    public GameObject enemy;
     
 
 	// Use this for initialization
@@ -31,6 +32,8 @@ public class RoomManager : Photon.MonoBehaviour {
     {
         Debug.Log("joined room");
         isConnected = true;
-        PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
+        GameObject aPlayer = PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0) as GameObject;
+        GameObject aZombie = PhotonNetwork.Instantiate(enemy.name, spawnPoint.position, spawnPoint.rotation, 0) as GameObject;
+        aZombie.GetComponent<ZombieBehavior>().player = aPlayer;
     }
 }
