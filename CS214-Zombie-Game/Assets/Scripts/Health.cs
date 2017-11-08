@@ -17,6 +17,7 @@ public class Health : MonoBehaviour {
         }
     }
 
+    [PunRPC]
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;

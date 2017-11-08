@@ -110,6 +110,11 @@ public class PlayerController : MonoBehaviour {
                 hit.transform.GetComponent<ZombieHealth>().TakeDamage(damage);
 				Debug.Log(hit.transform.GetComponent<ZombieHealth>().currentHealth);
             }
+
+            if(hit.transform.CompareTag("NetworkedEnemy"))
+            {
+                hit.transform.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);
+            }
         }
     }
 

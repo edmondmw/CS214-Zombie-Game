@@ -41,6 +41,7 @@ public class ZombieHealth : MonoBehaviour
 
 	}
 
+    [PunRPC]
 	public void TakeDamage(int damage)
 	{
 		currentHealth -= damage;
