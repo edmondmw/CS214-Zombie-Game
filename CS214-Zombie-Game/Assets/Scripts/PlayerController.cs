@@ -17,15 +17,22 @@ public class PlayerController : MonoBehaviour {
     bool grounded = false;
     bool alternateSwingAnim = true;
     Animator anim;
-    
-	void Start ()
+
+    public AudioClip swingAudioClip;
+    public AudioSource playerSound;
+
+    void Start ()
     {
         // Makes cursor disappear
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         anim = transform.Find("MainCamera").Find("Arms").GetComponent<Animator>();
         nextAttack = Time.time;
-	}
+
+        // Sound
+        playerSound.clip = swingAudioClip;
+
+    }
 
     private void FixedUpdate()
     {
@@ -86,10 +93,12 @@ public class PlayerController : MonoBehaviour {
         if (alternateSwingAnim)
         {
             anim.SetTrigger("Swing01");
+            playerSound.Play();
         }
         else
         {
             anim.SetTrigger("Swing02");
+            playerSound.Play();
         }
         alternateSwingAnim = !alternateSwingAnim;
         
