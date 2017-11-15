@@ -18,8 +18,12 @@ public class PlayerController : MonoBehaviour {
     bool alternateSwingAnim = true;
     Animator anim;
 
+    private bool isMoving;
+    // Audio
+    public AudioClip groundFootSteps;
     public AudioClip swingAudioClip;
     public AudioSource playerSound;
+
 
     void Start ()
     {
@@ -29,7 +33,7 @@ public class PlayerController : MonoBehaviour {
         anim = transform.Find("MainCamera").Find("Arms").GetComponent<Animator>();
         nextAttack = Time.time;
 
-        // Sound
+        // Audio
         playerSound.clip = swingAudioClip;
 
     }
@@ -45,6 +49,8 @@ public class PlayerController : MonoBehaviour {
     void Update ()
     {
         MoveHandler();
+        CheckMovement();
+        PlayMovementSound();
 
         // Attacking
         if(Input.GetButtonDown("Fire1"))
@@ -73,12 +79,14 @@ public class PlayerController : MonoBehaviour {
         {
             vertical *= sprintSpeed;
             anim.SetBool("IsRunning", true);
+            isSprinting = true;
         }
         else
         {
             anim.SetBool("IsRunning", false);
             vertical *= walkSpeed;
             horizontal *= walkSpeed;
+            isSprinting = false;
         }
            
         vertical *= Time.deltaTime;
@@ -93,12 +101,12 @@ public class PlayerController : MonoBehaviour {
         if (alternateSwingAnim)
         {
             anim.SetTrigger("Swing01");
-            playerSound.Play();
+            SwingSound();
         }
         else
         {
             anim.SetTrigger("Swing02");
-            playerSound.Play();
+            SwingSound();
         }
         alternateSwingAnim = !alternateSwingAnim;
         
@@ -135,4 +143,56 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    private void CheckMovement()
+    {
+        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
+           Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
+
+    }
+    private void PlayMovementSound()
+    {
+        if(isMoving)
+        {
+            if(isSprinting)
+            {
+                playerSound.pitch = 2;
+            }
+            else
+            {
+                playerSound.pitch = 1;
+            }
+            if(!playerSound.clip.Equals(groundFootSteps))
+            {
+                playerSound.clip = groundFootSteps;
+            }
+            if(!playerSound.isPlaying)
+                playerSound.Play();
+        }
+        else
+        {
+            if (playerSound.clip.Equals(groundFootSteps))
+            {
+                playerSound.Stop();
+            }
+        }
+    }
+    private void SwingSound()
+    {
+        if(playerSound.isPlaying)
+        {
+            playerSound.Stop();
+        }
+        if(!playerSound.clip.Equals(swingAudioClip))
+        {
+            playerSound.clip = swingAudioClip;
+        }
+        playerSound.Play();
+    }
 }
