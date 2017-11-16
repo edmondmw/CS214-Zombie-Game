@@ -16,8 +16,25 @@ public class RoomManager : Photon.MonoBehaviour {
 	void Start ()
     {
         PhotonNetwork.ConnectUsingSettings(versionNum);
-        roomName = "Room " + Random.Range(0, 999);
-        Debug.Log("Starting connection");
+
+        // Make sure the random room name doesn't already exist
+        bool roomNameExists = false;
+        do
+        {
+            roomName = "Room " + Random.Range(0, 999);
+
+            foreach (RoomInfo game in PhotonNetwork.GetRoomList())
+            {
+                if (roomName == game.Name)
+                {
+                    roomNameExists = true;
+                    break;
+                }
+                roomNameExists = false;
+            }
+        } while (roomNameExists);
+
+            Debug.Log("Starting connection");
     }
 
     public void OnJoinedLobby()
@@ -29,6 +46,8 @@ public class RoomManager : Photon.MonoBehaviour {
     public void OnJoinedRoom()
     {
         Debug.Log("Joined room");
+        // Disable the lobby camera once we join a room since we can use the first person camera
+        GameObject.Find("LobbyCamera").gameObject.SetActive(false);
         isConnected = false;
         GameObject aPlayer = PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0) as GameObject;
         GameObject aZombie = PhotonNetwork.Instantiate(enemy.name, spawnPoint.position, spawnPoint.rotation, 0) as GameObject;
@@ -39,10 +58,8 @@ public class RoomManager : Photon.MonoBehaviour {
     {
         if(isConnected)
         {
-            GUILayout.BeginArea(new Rect(Screen.width / 2 - 250, Screen.height / 2 - 250, 500, 500));
-            
+            GUILayout.BeginArea(new Rect(Screen.width / 2 - 250, Screen.height / 2 - 250, 500, 500));           
             roomName = GUILayout.TextField(roomName);
-
             if(GUILayout.Button("Create Room"))
             {
                 RoomOptions roomOptions = new RoomOptions();
