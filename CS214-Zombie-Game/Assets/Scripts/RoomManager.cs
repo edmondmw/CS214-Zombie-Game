@@ -16,24 +16,53 @@ public class RoomManager : Photon.MonoBehaviour {
 	void Start ()
     {
         PhotonNetwork.ConnectUsingSettings(versionNum);
-        Debug.Log("Starting conn");
-	}
+        roomName = "Room " + Random.Range(0, 999);
+        Debug.Log("Starting connection");
+    }
 
     public void OnJoinedLobby()
     {
-        Debug.Log("joined lobby");
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.IsVisible = true;
-        roomOptions.MaxPlayers = 4;
-        PhotonNetwork.JoinOrCreateRoom(roomName, null, null);
+        Debug.Log("Connected");
+        isConnected = true;
     }
 
     public void OnJoinedRoom()
     {
-        Debug.Log("joined room");
-        isConnected = true;
+        Debug.Log("Joined room");
+        isConnected = false;
         GameObject aPlayer = PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0) as GameObject;
         GameObject aZombie = PhotonNetwork.Instantiate(enemy.name, spawnPoint.position, spawnPoint.rotation, 0) as GameObject;
         aZombie.GetComponent<ZombieBehavior>().player = aPlayer;
+    }
+
+    private void OnGUI()
+    {
+        if(isConnected)
+        {
+            GUILayout.BeginArea(new Rect(Screen.width / 2 - 250, Screen.height / 2 - 250, 500, 500));
+            
+            roomName = GUILayout.TextField(roomName);
+
+            if(GUILayout.Button("Create Room"))
+            {
+                RoomOptions roomOptions = new RoomOptions();
+                roomOptions.IsVisible = true;
+                roomOptions.MaxPlayers = 4;
+                PhotonNetwork.JoinOrCreateRoom(roomName, roomOptions, null);
+            }
+
+            foreach(RoomInfo game in PhotonNetwork.GetRoomList())
+            {
+                if(GUILayout.Button(game.Name + ' ' + game.PlayerCount + '/' + game.MaxPlayers))
+                {
+                    RoomOptions roomOptions = new RoomOptions();
+                    roomOptions.IsVisible = true;
+                    roomOptions.MaxPlayers = 4;
+                    PhotonNetwork.JoinOrCreateRoom(game.Name, roomOptions, null);
+                }
+            }
+
+            GUILayout.EndArea();
+        }
     }
 }
