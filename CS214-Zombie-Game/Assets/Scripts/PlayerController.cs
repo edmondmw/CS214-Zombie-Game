@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
     public int damage = 20;
     public float hitRange = 1.5f;
     public float attackDelay = 1f;
+    // Used to send over the network
+    public bool isAttacking = false;
 
     float nextAttack;
     Rigidbody rb;
@@ -83,6 +85,7 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Attack()
     {
+        isAttacking = true;
         if (alternateSwingAnim)
         {
             anim.SetTrigger("Swing01");
@@ -106,6 +109,11 @@ public class PlayerController : MonoBehaviour {
 				// TODO: Make health an abstract class and zombie health a child
                 hit.transform.GetComponent<ZombieHealth>().TakeDamage(damage);
 				Debug.Log(hit.transform.GetComponent<ZombieHealth>().currentHealth);
+            }
+
+            if(hit.transform.CompareTag("NetworkedEnemy"))
+            {
+                hit.transform.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);
             }
         }
     }
