@@ -19,10 +19,10 @@ public class PlayerController : MonoBehaviour {
     Animator anim;
 
     private bool isMoving;
+
     // Audio
-    public AudioClip groundFootSteps;
-    public AudioClip swingAudioClip;
-    public AudioSource playerSound;
+    public Sound FootStepsSFX;
+    public Sound SwingsSFX;
 
 
     void Start ()
@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour {
         nextAttack = Time.time;
 
         // Audio
-        playerSound.clip = swingAudioClip;
 
     }
 
@@ -145,8 +144,10 @@ public class PlayerController : MonoBehaviour {
 
     private void CheckMovement()
     {
-        if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
-           Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
+            Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) ||
+            Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) ||
+            Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow))
         {
             isMoving = true;
         }
@@ -154,7 +155,6 @@ public class PlayerController : MonoBehaviour {
         {
             isMoving = false;
         }
-
     }
     private void PlayMovementSound()
     {
@@ -162,37 +162,24 @@ public class PlayerController : MonoBehaviour {
         {
             if(isSprinting)
             {
-                playerSound.pitch = 2;
+                //playerSound.pitch = 2;
+                FootStepsSFX.source.pitch = 2;
             }
             else
             {
-                playerSound.pitch = 1;
+                //playerSound.pitch = 1;
+                FootStepsSFX.source.pitch = 1;
             }
-            if(!playerSound.clip.Equals(groundFootSteps))
-            {
-                playerSound.clip = groundFootSteps;
-            }
-            if(!playerSound.isPlaying)
-                playerSound.Play();
+            if(!FootStepsSFX.source.isPlaying)
+                FootStepsSFX.source.Play();
         }
         else
         {
-            if (playerSound.clip.Equals(groundFootSteps))
-            {
-                playerSound.Stop();
-            }
+            FootStepsSFX.source.Stop();
         }
     }
     private void SwingSound()
     {
-        if(playerSound.isPlaying)
-        {
-            playerSound.Stop();
-        }
-        if(!playerSound.clip.Equals(swingAudioClip))
-        {
-            playerSound.clip = swingAudioClip;
-        }
-        playerSound.Play();
+        SwingsSFX.source.Play();
     }
 }

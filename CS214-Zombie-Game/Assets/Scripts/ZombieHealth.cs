@@ -14,14 +14,12 @@ public class ZombieHealth : MonoBehaviour
 	private bool isDead;
 
     // Sound
-    public AudioClip onHitAudioClip;
-    public AudioSource zombieSound;
+    public Sound beingSlashed;
 
 	public void Awake()
 	{
 		anim = GetComponent<Animator>();
 		currentHealth = startingHealth;
-        zombieSound.clip = onHitAudioClip;
 	}
 
 	//Play a random dead animation and destroy the zombie after disappearTime.
@@ -48,7 +46,7 @@ public class ZombieHealth : MonoBehaviour
 
 	public void TakeDamage(int damage)
 	{
-        zombieSound.Play();
+        beingSlashed.source.Play();
 		currentHealth -= damage;
 		if (currentHealth <= 0)
 		{
