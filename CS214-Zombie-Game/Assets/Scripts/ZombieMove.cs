@@ -60,19 +60,15 @@ public class ZombieMove : MonoBehaviour
                         Vector3 direction = players [targetNumber].transform.position;
                         direction.y = transform.position.y;
                         transform.LookAt (direction);
-
-
-                        
-                    if(minDistance <= nma.stoppingDistance)
-                        {attack.Attack (true);}
+                        attack.Attack (true);
                            
                     }
 
                     if (minDistance > maxAttackDistance) {
                         attack.Attack (false);
-                        nma.destination=players [targetNumber].transform.position;
-                    }
 
+                    }
+                    nma.destination=players [targetNumber].transform.position;
                 }
             } else {
                 ResetPlayerList ();
