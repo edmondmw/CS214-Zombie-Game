@@ -9,6 +9,7 @@ public class ZombieHealth : MonoBehaviour
 	public int currentHealth;
 	public float disappearTime = 10;
     public float hitBackward=5f;
+    public float hitBackwardUp=10f;
 
 	private Animator anim;
 	private bool isChangeColor;
@@ -63,9 +64,11 @@ public class ZombieHealth : MonoBehaviour
 
     private void BackwardByHit(GameObject ob)
     {
+        rb.isKinematic = false;
         Vector3 direction = transform.position - ob.transform.position;
-        direction.y = 0;
+        direction.y = hitBackwardUp;
         rb.AddForce (direction.normalized*hitBackward,ForceMode.Impulse);
+        rb.isKinematic = true;
     }
 
 

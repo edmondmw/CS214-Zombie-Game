@@ -200,11 +200,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4860795204510990}
   - component: {fileID: 95333228014681672}
-  - component: {fileID: 54322562176574512}
   - component: {fileID: 136867607305834342}
+  - component: {fileID: 54584839441860244}
   - component: {fileID: 114035877195016986}
   - component: {fileID: 195477794759596404}
   - component: {fileID: 114708327607858240}
+  - component: {fileID: 114238513224325072}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -497,8 +498,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555740704337484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 436.6504, y: 115.76634, z: 736.1591}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 436.94, y: 116.82, z: 686.89}
+  m_LocalScale: {x: 4, y: 5, z: 4}
   m_Children:
   - {fileID: 4452088085807242}
   - {fileID: 4999333295802012}
@@ -559,7 +560,7 @@ Transform:
   m_Father: {fileID: 4860795204510990}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &54322562176574512
+--- !u!54 &54584839441860244
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -570,7 +571,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
@@ -629,7 +630,19 @@ MonoBehaviour:
   startingHealth: 100
   currentHealth: 0
   disappearTime: 10
-  hitBackward: 5
+  hitBackwardSpeed: 200
+  hitBackwardTime: 5
+--- !u!114 &114238513224325072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555740704337484}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656158cbc31aea54587d807fb4ab1119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114328372052686424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -667,9 +680,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0aec97952a23490bae25a60fb1ebb08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
+  players:
+  - {fileID: 0}
   detectableRange: 50
-  maxAttackDistance: 5
+  maxAttackDistance: 6
 --- !u!136 &136867607305834342
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1421,16 +1435,16 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555740704337484}
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 4
+  m_AngularSpeed: 360
+  m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.68
   m_BaseOffset: 0
-  m_WalkableMask: 1
+  m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4
