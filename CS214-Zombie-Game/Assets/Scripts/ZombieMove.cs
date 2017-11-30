@@ -9,6 +9,9 @@ public class ZombieMove : MonoBehaviour
     public GameObject[] players;
     public float detectableRange = 50f;
     public float maxAttackDistance = 2f;
+    public float hitBackward=5f;
+    public float hitBackwardUp=15f;
+    [HideInInspector]public bool isHit;
 
     private NavMeshAgent nma;
     private float distance;
@@ -19,6 +22,7 @@ public class ZombieMove : MonoBehaviour
     private int playerNumber;
     private int targetNumber;
     private GameObject target;
+    private Rigidbody rb;
 
 
     // Use this for initialization
@@ -28,6 +32,7 @@ public class ZombieMove : MonoBehaviour
         attack = GetComponentInChildren<ZombieAttack> ();
         ResetPlayerList ();
         nma = GetComponent <NavMeshAgent> ();
+        rb = GetComponent <Rigidbody> ();
     }
 	
     // Update is called once per frame
@@ -35,10 +40,7 @@ public class ZombieMove : MonoBehaviour
     {
 
 
-
-
-
-        if (playerNumber>0&&health.currentHealth > 0) {
+        if (playerNumber>0&&health.currentHealth > 0&&!isHit) {
             targetNumber = 0;
             if (players [targetNumber] != null) {
                 minDistance = Vector3.Distance (players [0].transform.position, transform.position);
@@ -53,7 +55,7 @@ public class ZombieMove : MonoBehaviour
                     }
                 } 
 
-                Debug.Log (minDistance);
+                //Debug.Log (minDistance);
                 if (minDistance <= detectableRange) {
                     if  (minDistance <=maxAttackDistance)
                     {
@@ -85,5 +87,17 @@ public class ZombieMove : MonoBehaviour
         playerNumber = players.Length;
     }
 
+    public void BackwardByHit(GameObject ob)
+    {
+        rb.isKinematic = false;
+        Vector3 direction = transform.position - ob.transform.position;
+        direction.y = hitBackwardUp;
+        Debug.Log (direction);
+        rb.AddForce (direction.normalized*hitBackward,ForceMode.Force);
+        //rb.AddExplosionForce (hitBackward,ob.transform.position,100f,hitBackwardUp);
+        isHit = false;
+    }
+
+        
 
 }

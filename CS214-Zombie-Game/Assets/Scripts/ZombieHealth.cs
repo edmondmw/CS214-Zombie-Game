@@ -8,20 +8,16 @@ public class ZombieHealth : MonoBehaviour
 	public int startingHealth = 100;
 	public int currentHealth;
 	public float disappearTime = 10;
-    public float hitBackward=5f;
-    public float hitBackwardUp=10f;
+
 
 	private Animator anim;
-	private bool isChangeColor;
-    private Rigidbody rb;
-
+    private ZombieMove move;
 
 	public void Awake()
 	{
-        rb = GetComponent <Rigidbody> ();
 		anim = GetComponent<Animator>();
 		currentHealth = startingHealth;
-
+        move = GetComponent <ZombieMove> ();
 	}
 
 	//Play a random dead animation and destroy the zombie after disappearTime.
@@ -58,18 +54,12 @@ public class ZombieHealth : MonoBehaviour
 		if (currentHealth <= 0) {
 			Death ();
 		} else {
-            BackwardByHit (ob);
+            move.isHit = true;
+            move.BackwardByHit (ob);
 		}
 	}
 
-    private void BackwardByHit(GameObject ob)
-    {
-        rb.isKinematic = false;
-        Vector3 direction = transform.position - ob.transform.position;
-        direction.y = hitBackwardUp;
-        rb.AddForce (direction.normalized*hitBackward,ForceMode.Impulse);
-        rb.isKinematic = true;
-    }
+
 
 
     
