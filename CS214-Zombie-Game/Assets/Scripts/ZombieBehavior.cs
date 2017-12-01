@@ -62,9 +62,6 @@ public class ZombieBehavior : MonoBehaviour
 					Move ();
 				}
 			}
-
-            // sound
-
 		}
 	}
 

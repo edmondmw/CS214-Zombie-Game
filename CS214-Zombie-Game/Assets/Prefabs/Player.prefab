@@ -3613,12 +3613,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 7
   sprintSpeed: 10
-  jumpForce: 200
+  jumpForce: 250
   damage: 20
   hitRange: 1.5
   attackDelay: 1
   FootStepsSFX: {fileID: 114922948198838202}
   SwingsSFX: {fileID: 114791090598877656}
+  isAttacking: 0
 --- !u!124 &124842307449883696
 Behaviour:
   m_ObjectHideFlags: 1

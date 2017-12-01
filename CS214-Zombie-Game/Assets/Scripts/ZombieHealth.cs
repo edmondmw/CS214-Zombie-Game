@@ -44,6 +44,7 @@ public class ZombieHealth : MonoBehaviour
 
 	}
 
+    [PunRPC]
 	public void TakeDamage(int damage)
 	{
         beingSlashed.source.Play();
