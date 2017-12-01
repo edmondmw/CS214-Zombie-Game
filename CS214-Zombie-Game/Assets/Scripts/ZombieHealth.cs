@@ -13,6 +13,9 @@ public class ZombieHealth : MonoBehaviour
 	private bool isChangeColor;
 	private bool isDead;
 
+    // Sound
+    public Sound beingSlashed;
+
 	public void Awake()
 	{
 		anim = GetComponent<Animator>();
@@ -44,6 +47,7 @@ public class ZombieHealth : MonoBehaviour
     [PunRPC]
 	public void TakeDamage(int damage)
 	{
+        beingSlashed.source.Play();
 		currentHealth -= damage;
 		if (currentHealth <= 0)
 		{

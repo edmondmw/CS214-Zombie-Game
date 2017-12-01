@@ -1421,15 +1421,10 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 1551584539}
-    - target: {fileID: 114557830471872964, guid: 5282c48e3e5366d43970d5eb34d9d534,
+    - target: {fileID: 82067575873198468, guid: 5282c48e3e5366d43970d5eb34d9d534,
         type: 2}
-      propertyPath: maxAttackDistance
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 114557830471872964, guid: 5282c48e3e5366d43970d5eb34d9d534,
-        type: 2}
-      propertyPath: attackDistance
-      value: 3
+      propertyPath: Pan2D
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5282c48e3e5366d43970d5eb34d9d534, type: 2}
