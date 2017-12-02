@@ -8,10 +8,9 @@ public class ZombieMove : MonoBehaviour
 
     public GameObject[] players;
     public float detectableRange = 50f;
-    public float maxAttackDistance = 2f;
-    public float hitBackward=5f;
-    public float hitBackwardUp=15f;
+    public float maxAttackDistance = 5f;
     [HideInInspector]public bool isHit;
+    [HideInInspector]public Vector3 hitPosition;
 
     private NavMeshAgent nma;
     private float distance;
@@ -23,11 +22,9 @@ public class ZombieMove : MonoBehaviour
     private int targetNumber;
     private GameObject target;
 
-	[HideInInspector]public bool isHit;
-	[HideInInspector]public Vector3 hitPosition;
-	public float hitBackDistance=20f;
+
+	
 	private float deltaDistance;
-	private float totalDistance= 0f;
 	static float t=0f;
 
 

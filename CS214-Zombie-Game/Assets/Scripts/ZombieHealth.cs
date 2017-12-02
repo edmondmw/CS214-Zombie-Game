@@ -13,6 +13,9 @@ public class ZombieHealth : MonoBehaviour
 	private Animator anim;
 	private ZombieMove zm;
 
+    // Sound
+    public Sound beingSlashed;
+
 	public void Awake()
 	{
 		anim = GetComponent<Animator>();
@@ -47,16 +50,18 @@ public class ZombieHealth : MonoBehaviour
         TakeDamage (damage,obj);
     }
 
+
     //The zombie moves against the direction of the object ob hit it.
     public void TakeDamage(int damage,GameObject ob)
 	{
+        beingSlashed.source.Play();
 		currentHealth -= damage;
 		if (currentHealth <= 0) {
 			Death ();
 		} else {
 			zm.hitPosition=transform.position+(transform.position - ob.transform.position).normalized*hitBackward;
 			zm.isHit = true;
-            //BackwardByHit (ob);
+
 		}
 	}
 
