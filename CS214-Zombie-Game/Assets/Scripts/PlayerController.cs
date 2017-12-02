@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
     public int damage = 20;
     public float hitRange = 1.5f;
     public float attackDelay = 1f;
+    // Used to send over the network
+    public bool isAttacking = false;
 
     float nextAttack;
     Rigidbody rb;
@@ -17,15 +19,25 @@ public class PlayerController : MonoBehaviour {
     bool grounded = false;
     bool alternateSwingAnim = true;
     Animator anim;
-    
-	void Start ()
+
+    private bool isMoving;
+
+    // Audio
+    public Sound FootStepsSFX;
+    public Sound SwingsSFX;
+
+
+    void Start ()
     {
         // Makes cursor disappear
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
         anim = transform.Find("MainCamera").Find("Arms").GetComponent<Animator>();
         nextAttack = Time.time;
-	}
+
+        // Audio
+
+    }
 
     private void FixedUpdate()
     {
@@ -38,6 +50,8 @@ public class PlayerController : MonoBehaviour {
     void Update ()
     {
         MoveHandler();
+        CheckMovement();
+        PlayMovementSound();
 
         // Attacking
         if(Input.GetButtonDown("Fire1"))
@@ -66,12 +80,14 @@ public class PlayerController : MonoBehaviour {
         {
             vertical *= sprintSpeed;
             anim.SetBool("IsRunning", true);
+            isSprinting = true;
         }
         else
         {
             anim.SetBool("IsRunning", false);
             vertical *= walkSpeed;
             horizontal *= walkSpeed;
+            isSprinting = false;
         }
            
         vertical *= Time.deltaTime;
@@ -83,13 +99,16 @@ public class PlayerController : MonoBehaviour {
 
     IEnumerator Attack()
     {
+        isAttacking = true;
         if (alternateSwingAnim)
         {
             anim.SetTrigger("Swing01");
+            SwingSound();
         }
         else
         {
             anim.SetTrigger("Swing02");
+            SwingSound();
         }
         alternateSwingAnim = !alternateSwingAnim;
         
@@ -106,6 +125,11 @@ public class PlayerController : MonoBehaviour {
 				// TODO: Make health an abstract class and zombie health a child
                 hit.transform.GetComponent<ZombieHealth>().TakeDamage(damage);
 				Debug.Log(hit.transform.GetComponent<ZombieHealth>().currentHealth);
+            }
+
+            if(hit.transform.CompareTag("NetworkedEnemy"))
+            {
+                hit.transform.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);
             }
         }
     }
@@ -126,4 +150,44 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    private void CheckMovement()
+    {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) ||
+            Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D) ||
+            Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) ||
+            Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow))
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+        }
+    }
+    private void PlayMovementSound()
+    {
+        if(isMoving)
+        {
+            if(isSprinting)
+            {
+                //playerSound.pitch = 2;
+                FootStepsSFX.source.pitch = 2;
+            }
+            else
+            {
+                //playerSound.pitch = 1;
+                FootStepsSFX.source.pitch = 1;
+            }
+            if(!FootStepsSFX.source.isPlaying)
+                FootStepsSFX.source.Play();
+        }
+        else
+        {
+            FootStepsSFX.source.Stop();
+        }
+    }
+    private void SwingSound()
+    {
+        SwingsSFX.source.Play();
+    }
 }

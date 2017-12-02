@@ -6,7 +6,12 @@ TagManager:
   tags:
   - Ground
   - Enemy
+<<<<<<< HEAD
   - Body
+=======
+  - nodecal
+  - NetworkedEnemy
+>>>>>>> master
   layers:
   - Default
   - TransparentFX
