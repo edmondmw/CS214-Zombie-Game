@@ -22,7 +22,13 @@ public class ZombieMove : MonoBehaviour
     private int playerNumber;
     private int targetNumber;
     private GameObject target;
-    private Rigidbody rb;
+
+	[HideInInspector]public bool isHit;
+	[HideInInspector]public Vector3 hitPosition;
+	public float hitBackDistance=20f;
+	private float deltaDistance;
+	private float totalDistance= 0f;
+	static float t=0f;
 
 
     // Use this for initialization
@@ -32,54 +38,63 @@ public class ZombieMove : MonoBehaviour
         attack = GetComponentInChildren<ZombieAttack> ();
         ResetPlayerList ();
         nma = GetComponent <NavMeshAgent> ();
-        rb = GetComponent <Rigidbody> ();
     }
 	
     // Update is called once per frame
     void Update ()
     {
+		if (isHit) {
+			attack.Attack (false);
+			transform.position = new Vector3 (Mathf.Lerp (transform.position.x, hitPosition.x, t), transform.position.y, Mathf.Lerp (transform.position.z, hitPosition.z, t));
+			t += 0.5f * Time.deltaTime;
+			if (t>1.0f) {
 
-
-        if (playerNumber>0&&health.currentHealth > 0&&!isHit) {
-            targetNumber = 0;
-            if (players [targetNumber] != null) {
-                minDistance = Vector3.Distance (players [0].transform.position, transform.position);
+				isHit = false;
+				t = 0f;
+			}
+		} else {
+		
+			if (playerNumber > 0 && health.currentHealth > 0) {
+				targetNumber = 0;
+				if (players [targetNumber] != null) {
+					minDistance = Vector3.Distance (players [0].transform.position, transform.position);
 			
-                if (playerNumber > 1) {
-                    for (int i = 1; i < playerNumber; i++) {
-                        distance = Vector3.Distance (players [i].transform.position, transform.position);
-                        if (distance < minDistance) {
-                            minDistance = distance;
-                            targetNumber = i;
-                        }
-                    }
-                } 
+					if (playerNumber > 1) {
+						for (int i = 1; i < playerNumber; i++) {
+							distance = Vector3.Distance (players [i].transform.position, transform.position);
+							if (distance < minDistance) {
+								minDistance = distance;
+								targetNumber = i;
+							}
+						}
+					} 
 
-                //Debug.Log (minDistance);
-                if (minDistance <= detectableRange) {
-                    if  (minDistance <=maxAttackDistance)
-                    {
-                        Vector3 direction = players [targetNumber].transform.position;
-                        direction.y = transform.position.y;
-                        transform.LookAt (direction);
-                        attack.Attack (true);
+					Debug.Log (minDistance);
+					if (minDistance <= detectableRange) {
+						if (minDistance <= maxAttackDistance) {
+							Vector3 direction = players [targetNumber].transform.position;
+							direction.y = transform.position.y;
+							transform.LookAt (direction);
+							attack.Attack (true);
+
                            
-                    }
+						}
 
-                    if (minDistance > maxAttackDistance) {
-                        attack.Attack (false);
+						if (minDistance > maxAttackDistance) {
+							attack.Attack (false);
 
-                    }
-                    nma.destination=players [targetNumber].transform.position;
-                }
-            } else {
-                ResetPlayerList ();
-            }
+						}
+						nma.destination = players [targetNumber].transform.position;
+					}
+				} else {
+					ResetPlayerList ();
+				}
 
 
-        }else{
-            nma.Stop ();
-        }
+			} else {
+				nma.Stop ();
+			}
+		}
     }
     void ResetPlayerList()
     {
@@ -87,16 +102,6 @@ public class ZombieMove : MonoBehaviour
         playerNumber = players.Length;
     }
 
-    public void BackwardByHit(GameObject ob)
-    {
-        rb.isKinematic = false;
-        Vector3 direction = transform.position - ob.transform.position;
-        direction.y = hitBackwardUp;
-        Debug.Log (direction);
-        rb.AddForce (direction.normalized*hitBackward,ForceMode.Force);
-        //rb.AddExplosionForce (hitBackward,ob.transform.position,100f,hitBackwardUp);
-        isHit = false;
-    }
 
         
 

@@ -8,16 +8,16 @@ public class ZombieHealth : MonoBehaviour
 	public int startingHealth = 100;
 	public int currentHealth;
 	public float disappearTime = 10;
-
+    public float hitBackward=5f;
 
 	private Animator anim;
-    private ZombieMove move;
+	private ZombieMove zm;
 
 	public void Awake()
 	{
 		anim = GetComponent<Animator>();
 		currentHealth = startingHealth;
-        move = GetComponent <ZombieMove> ();
+		zm = GetComponent <ZombieMove> ();
 	}
 
 	//Play a random dead animation and destroy the zombie after disappearTime.
@@ -54,8 +54,9 @@ public class ZombieHealth : MonoBehaviour
 		if (currentHealth <= 0) {
 			Death ();
 		} else {
-            move.isHit = true;
-            move.BackwardByHit (ob);
+			zm.hitPosition=transform.position+(transform.position - ob.transform.position).normalized*hitBackward;
+			zm.isHit = true;
+            //BackwardByHit (ob);
 		}
 	}
 
