@@ -1317,7 +1317,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  isAttacking: 0
 --- !u!114 &114346326296845558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1356,7 +1355,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  isAttacking: 0
 --- !u!114 &114594577880403112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1384,12 +1382,14 @@ MonoBehaviour:
   players:
   - {fileID: 0}
   detectableRange: 50
-  maxAttackDistance: 4
-  hitBackward: 5
-  hitBackwardUp: 15
+  maxAttackDistance: 4.5
+  distanceOnStair: 10
+  distanceOnGround: 4.5
+  stopDistanceOnStair: 9
+  stopDistanceOnGround: 0
   isHit: 0
   hitPosition: {x: 0, y: 0, z: 0}
-  hitBackDistance: 20
+  damage: 10
 --- !u!136 &136867607305834342
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2146,7 +2146,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
-  m_StoppingDistance: 5
+  m_StoppingDistance: 4
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
