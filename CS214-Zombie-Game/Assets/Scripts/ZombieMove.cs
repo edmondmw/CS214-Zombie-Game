@@ -8,41 +8,58 @@ public class ZombieMove : MonoBehaviour
 
     public GameObject[] players;
     public float detectableRange = 50f;
-    public float maxAttackDistance = 5f;
+    public float maxAttackDistance = 4.5f;
+    public float distanceOnStair=10f;
+    public float distanceOnGround=4.5f;
+    public float stopDistanceOnStair=9f;
+    public float stopDistanceOnGround;
     [HideInInspector]public bool isHit;
     [HideInInspector]public Vector3 hitPosition;
+    public int damage=10;
 
+    private Vector3 position;
+    private Vector3 groundCheck;
+    private bool isOnStair;
+    private bool isOnGround=true;
     private NavMeshAgent nma;
     private float distance;
     private ZombieHealth health;
     private ZombieAttack attack;
     private float minDistance;
-    private bool isMultiPlayer;
     private int playerNumber;
     private int targetNumber;
     private GameObject target;
-
-
-	
-	private float deltaDistance;
-	static float t=0f;
+    private int attackHash = Animator.StringToHash ("isAttack");
+    private Animator anim;	
+    private static float t=0f;
 
 
     // Use this for initialization
     void Awake ()
     {
         health = GetComponent<ZombieHealth> ();
-        attack = GetComponentInChildren<ZombieAttack> ();
+        GetComponentInChildren<ZombieAttack> ().damage = damage;
         ResetPlayerList ();
         nma = GetComponent <NavMeshAgent> ();
+        anim = GetComponentInParent <Animator> ();
+        stopDistanceOnGround = nma.stoppingDistance;
     }
 	
     // Update is called once per frame
     void Update ()
     {
+        position = transform.position;
+        groundCheck=position+new Vector3(0,-0.2f,0); 
+        isOnStair = Physics.Linecast (position, groundCheck, 1 << LayerMask.NameToLayer ("Stair"));
+        if(isOnGround==isOnStair)
+        {
+            ChangeDistance ();
+            isOnGround = !isOnGround;
+        }
+
 		if (isHit) {
-			attack.Attack (false);
-			transform.position = new Vector3 (Mathf.Lerp (transform.position.x, hitPosition.x, t), transform.position.y, Mathf.Lerp (transform.position.z, hitPosition.z, t));
+			
+			transform.position = new Vector3 (Mathf.Lerp (position.x, hitPosition.x, t), position.y, Mathf.Lerp (position.z, hitPosition.z, t));
 			t += 0.5f * Time.deltaTime;
 			if (t>1.0f) {
 
@@ -66,22 +83,24 @@ public class ZombieMove : MonoBehaviour
 						}
 					} 
 
-					Debug.Log (minDistance);
+                    //Debug.Log (minDistance);
 					if (minDistance <= detectableRange) {
 						if (minDistance <= maxAttackDistance) {
 							Vector3 direction = players [targetNumber].transform.position;
-							direction.y = transform.position.y;
+							direction.y = position.y;
 							transform.LookAt (direction);
-							attack.Attack (true);
 
-                           
+                                Attack ();
+
+
 						}
 
 						if (minDistance > maxAttackDistance) {
-							attack.Attack (false);
-
+                            anim.SetBool (attackHash,false);
 						}
+
 						nma.destination = players [targetNumber].transform.position;
+
 					}
 				} else {
 					ResetPlayerList ();
@@ -99,6 +118,23 @@ public class ZombieMove : MonoBehaviour
         playerNumber = players.Length;
     }
 
+    void Attack()
+    {
+        anim.SetBool (attackHash,true);
+
+    }
+
+    public void ChangeDistance()
+    {
+        
+        if(isOnStair){
+            nma.stoppingDistance = stopDistanceOnStair;
+            maxAttackDistance = distanceOnStair;
+        }else{
+            nma.stoppingDistance = stopDistanceOnGround;
+            maxAttackDistance = distanceOnGround;
+        }
+    }
 
         
 

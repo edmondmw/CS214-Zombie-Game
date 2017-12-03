@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33010956981386438}
   - component: {fileID: 65470738754515862}
   - component: {fileID: 23210785046879850}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpperStair
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -40,9 +40,9 @@ GameObject:
   - component: {fileID: 33749456208309020}
   - component: {fileID: 23119941632820194}
   - component: {fileID: 64923929388350964}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: wood_stairs_support (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 32
@@ -58,9 +58,9 @@ GameObject:
   - component: {fileID: 33343072427929504}
   - component: {fileID: 65049902811241330}
   - component: {fileID: 23744011060469294}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: solid_stairs (1)
-  m_TagString: Ground
+  m_TagString: Stair
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 40
