@@ -16,9 +16,9 @@ public class ZombieMove : MonoBehaviour
     [HideInInspector]public bool isHit;
     [HideInInspector]public Vector3 hitPosition;
     public int damage=10;
-    public float speed=3.5f;
+    /*public float speed=3.5f;
     public float idleSpeed=1f;
-    public float wanderDistance=10f;
+    public float wanderDistance=10f;*/
 
     private Vector3 position;
     private Vector3 groundCheck;
