@@ -3316,7 +3316,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3396,7 +3396,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3617,9 +3617,9 @@ MonoBehaviour:
   damage: 20
   hitRange: 1.5
   attackDelay: 1
+  isAttacking: 0
   FootStepsSFX: {fileID: 114922948198838202}
   SwingsSFX: {fileID: 114791090598877656}
-  isAttacking: 0
 --- !u!124 &124842307449883696
 Behaviour:
   m_ObjectHideFlags: 1
