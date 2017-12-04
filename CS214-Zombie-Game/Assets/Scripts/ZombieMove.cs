@@ -16,6 +16,9 @@ public class ZombieMove : MonoBehaviour
     [HideInInspector]public bool isHit;
     [HideInInspector]public Vector3 hitPosition;
     public int damage=10;
+    public float speed=3.5f;
+    public float idleSpeed=1f;
+    public float wanderDistance=10f;
 
     private Vector3 position;
     private Vector3 groundCheck;
@@ -34,6 +37,7 @@ public class ZombieMove : MonoBehaviour
     private static float t=0f;
 
 
+
     // Use this for initialization
     void Awake ()
     {
@@ -43,6 +47,7 @@ public class ZombieMove : MonoBehaviour
         nma = GetComponent <NavMeshAgent> ();
         anim = GetComponentInParent <Animator> ();
         stopDistanceOnGround = nma.stoppingDistance;
+
     }
 	
     // Update is called once per frame
@@ -56,6 +61,7 @@ public class ZombieMove : MonoBehaviour
             ChangeDistance ();
             isOnGround = !isOnGround;
         }
+            
 
 		if (isHit) {
 			
@@ -84,7 +90,9 @@ public class ZombieMove : MonoBehaviour
 					} 
 
                     //Debug.Log (minDistance);
+                    //Go and attack if in detectableRange
 					if (minDistance <= detectableRange) {
+
 						if (minDistance <= maxAttackDistance) {
 							Vector3 direction = players [targetNumber].transform.position;
 							direction.y = position.y;
@@ -101,7 +109,7 @@ public class ZombieMove : MonoBehaviour
 
 						nma.destination = players [targetNumber].transform.position;
 
-					}
+                    }
 				} else {
 					ResetPlayerList ();
 				}
@@ -124,7 +132,7 @@ public class ZombieMove : MonoBehaviour
 
     }
 
-    public void ChangeDistance()
+    void ChangeDistance()
     {
         
         if(isOnStair){
