@@ -44,6 +44,9 @@ public class ZombieBehavior : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        // Temporary until change the zombie movement system
+		if (player == null)
+			return;
 		if (health.currentHealth > 0) {
 			playerPosition = player.transform.position;
 			distanceFromPlayer = Vector3.Distance (playerPosition, transform.position);

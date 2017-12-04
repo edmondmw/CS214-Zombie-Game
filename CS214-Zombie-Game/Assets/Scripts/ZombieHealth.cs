@@ -40,9 +40,16 @@ public class ZombieHealth : MonoBehaviour
 			break;
 
 		}
-		Destroy(gameObject, disappearTime);
-
-	}
+        if (PhotonNetwork.connected && PhotonNetwork.isMasterClient)
+        {
+            // TODO: add delay here
+            PhotonNetwork.Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject, disappearTime);
+        }
+    }
 
     [PunRPC]
 	public void TakeDamage(int damage)
