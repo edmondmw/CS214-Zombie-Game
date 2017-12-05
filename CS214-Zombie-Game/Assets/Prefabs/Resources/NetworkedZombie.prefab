@@ -1304,7 +1304,7 @@ MonoBehaviour:
   startingHealth: 100
   currentHealth: 0
   disappearTime: 10
-  hitBackward: 5
+  hitBackward: 2
   beingSlashed: {fileID: 114945183818501310}
 --- !u!114 &114514822598080584
 MonoBehaviour:
@@ -1416,7 +1416,7 @@ MonoBehaviour:
   stopDistanceOnGround: 0
   isHit: 0
   hitPosition: {x: 0, y: 0, z: 0}
-  damage: 10
+  damage: 5
 --- !u!114 &114945183818501310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2182,7 +2182,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1579594135984342}
   m_Enabled: 1
   m_Radius: 0.3
-  m_Speed: 3.5
+  m_Speed: 5.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
