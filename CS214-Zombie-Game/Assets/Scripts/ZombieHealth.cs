@@ -8,10 +8,10 @@ public class ZombieHealth : MonoBehaviour
 	public int startingHealth = 100;
 	public int currentHealth;
 	public float disappearTime = 10;
+    public float hitBackward=5f;
 
 	private Animator anim;
-	private bool isChangeColor;
-	private bool isDead;
+	private ZombieMove zm;
 
     // Sound
     public Sound beingSlashed;
@@ -20,6 +20,7 @@ public class ZombieHealth : MonoBehaviour
 	{
 		anim = GetComponent<Animator>();
 		currentHealth = startingHealth;
+		zm = GetComponent <ZombieMove> ();
 	}
 
 	//Play a random dead animation and destroy the zombie after disappearTime.
@@ -52,43 +53,31 @@ public class ZombieHealth : MonoBehaviour
     }
 
     [PunRPC]
-	public void TakeDamage(int damage)
+    public void TakeDamage(int damage)
+    {
+        GameObject obj=GameObject.FindGameObjectWithTag ("Player");
+        TakeDamage (damage,obj);
+    }
+
+
+    
+    //The zombie moves against the direction of the object ob hit it.
+    public void TakeDamage(int damage,GameObject ob)
 	{
         beingSlashed.source.Play();
 		currentHealth -= damage;
-		if (currentHealth <= 0)
-		{
-			isDead = true;
-			Death();
+		if (currentHealth <= 0) {
+			Death ();
+		} else {
+			zm.hitPosition=transform.position+(transform.position - ob.transform.position).normalized*hitBackward;
+			zm.isHit = true;
+
 		}
 	}
-	/*
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Weapon"))
-        {
-            currentHealth -= collision.gameObject.GetComponent<PlayerController>().damage;
 
-            //Color turn red when get hits.
-            StartCoroutine(HitColor());
-        }
-    }
 
-    IEnumerator HitColor()
-    {
-        if (isChangeColor)
-        {
-            yield break;
-        }
-        isChangeColor = true;
 
-        Color originColor =GetComponent<Renderer>().material.color;
-        GetComponent<Renderer>().material.color = Color.red;
-        yield return new WaitForSeconds(0.2f);
-        GetComponent<Renderer>().material.color = originColor;
-        isChangeColor = false;
 
-    }
-    */
+    
 }
 

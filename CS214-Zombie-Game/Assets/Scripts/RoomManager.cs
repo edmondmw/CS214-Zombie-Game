@@ -51,6 +51,7 @@ public class RoomManager : Photon.MonoBehaviour {
         GetComponent<SpawnManager>().enabled = true;
         isConnected = false;
         PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
+        //aZombie.GetComponent<ZombieMove>().players[0] = aPlayer;
     }
 
     private void OnGUI()
