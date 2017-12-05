@@ -9,7 +9,6 @@ public class RoomManager : Photon.MonoBehaviour {
     public bool isConnected = false; 
     public Transform spawnPoint;
     public GameObject player;
-    public GameObject enemy;
     
 
 	// Use this for initialization
@@ -17,7 +16,7 @@ public class RoomManager : Photon.MonoBehaviour {
     {
         PhotonNetwork.ConnectUsingSettings(versionNum);
 
-        // Make sure the random room name doesn't already exist
+        // Make sure the random room name doesn't already exist. Temp solution. If there are 1000 rooms then this would get stuck
         bool roomNameExists = false;
         do
         {
@@ -34,7 +33,7 @@ public class RoomManager : Photon.MonoBehaviour {
             }
         } while (roomNameExists);
 
-            Debug.Log("Starting connection");
+        Debug.Log("Starting connection");
     }
 
     public void OnJoinedLobby()
@@ -48,10 +47,10 @@ public class RoomManager : Photon.MonoBehaviour {
         Debug.Log("Joined room");
         // Disable the lobby camera once we join a room since we can use the first person camera
         GameObject.Find("LobbyCamera").gameObject.SetActive(false);
+        GetComponent<SpawnManager>().enabled = true;
         isConnected = false;
-        GameObject aPlayer = PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0) as GameObject;
-        GameObject aZombie = PhotonNetwork.Instantiate(enemy.name, spawnPoint.position, spawnPoint.rotation, 0) as GameObject;
-        aZombie.GetComponent<ZombieMove>().players[0] = aPlayer;
+        PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
+        //aZombie.GetComponent<ZombieMove>().players[0] = aPlayer;
     }
 
     private void OnGUI()
