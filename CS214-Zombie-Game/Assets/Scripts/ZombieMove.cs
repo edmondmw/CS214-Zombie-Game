@@ -110,12 +110,21 @@ public class ZombieMove : MonoBehaviour
 						nma.destination = players [targetNumber].transform.position;
 
                     }
+                    // If player isn't in range, then move randomly. Only want to set new destination when the zombie has stopped
+                    else if(nma.velocity.magnitude == 0){
+                        float radius = 50f;
+                        Vector3 point = transform.position + Random.insideUnitSphere * radius;
+                        NavMeshHit nh;
+                        NavMesh.SamplePosition(point, out nh, radius, NavMesh.AllAreas);
+                        nma.destination = nh.position;
+                    }
 				} else {
 					ResetPlayerList ();
-				}
+                }
 
 
 			} else {
+                Debug.Log("stop!");
 				nma.Stop ();
 			}
 		}
