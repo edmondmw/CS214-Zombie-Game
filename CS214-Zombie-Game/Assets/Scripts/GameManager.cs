@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public Transform[] enemySpawns;
     public GameObject enemy;
-    public int waveSize = 1;
+    public int waveSize = 2;
     int numEnemies = 0;
     int numPlayers = 1;
 
@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
         if(numEnemies == 0)
         {
             StartCoroutine(SpawnWaves());
-            waveSize *= 2;
             numEnemies = waveSize;
         }
 
@@ -45,6 +44,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SpawnWaves()
     {
+        numEnemies = waveSize;
+
         yield return new WaitForSeconds(10f);
 
         for(int i = 0, j = 0; i < waveSize; ++i, ++j)
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
                 j = 0;
             PhotonNetwork.Instantiate(enemy.name, enemySpawns[j].position, enemySpawns[j].rotation, 0);
         }
+        waveSize *= 2;
     }
 
 

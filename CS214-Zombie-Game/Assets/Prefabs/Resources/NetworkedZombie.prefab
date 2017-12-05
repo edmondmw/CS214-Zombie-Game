@@ -643,7 +643,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1579594135984342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.942307, y: 0.05, z: 13.529901}
+  m_LocalPosition: {x: 466.2983, y: 121.6, z: 744.2411}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4596571478247040}
@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026d5569e3ae1fd478e13c45ef99b3cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 2
 --- !u!114 &114559195546767982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1389,7 +1389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026d5569e3ae1fd478e13c45ef99b3cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 2
 --- !u!114 &114781500059178294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1408,7 +1408,7 @@ MonoBehaviour:
   attack1: {fileID: 114311209449992678}
   attack2: {fileID: 114213786743871392}
   attackRate: 0
-  detectableRange: 10
+  detectableRange: 30
   maxAttackDistance: 4.5
   distanceOnStair: 10
   distanceOnGround: 4.5
