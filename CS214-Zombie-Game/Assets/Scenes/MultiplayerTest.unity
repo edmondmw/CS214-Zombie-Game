@@ -337,11 +337,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   versionNum: 0.1
-  roomName: roomA
   isConnected: 0
   spawnPoint: {fileID: 326852480}
   player: {fileID: 1260980972635928, guid: 83f4b5d0713d91e4e933269573c27cfa, type: 2}
-  enemy: {fileID: 1579594135984342, guid: a18cc59c0d52dc547bb004d44b989333, type: 2}
 --- !u!114 &341214528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +357,7 @@ MonoBehaviour:
   - {fileID: 579401446}
   - {fileID: 304945892}
   enemy: {fileID: 1579594135984342, guid: a18cc59c0d52dc547bb004d44b989333, type: 2}
+  waveSize: 1
 --- !u!1 &579401445
 GameObject:
   m_ObjectHideFlags: 0
