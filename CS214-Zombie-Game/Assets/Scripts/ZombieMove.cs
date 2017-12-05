@@ -7,6 +7,11 @@ public class ZombieMove : MonoBehaviour
 {
 
     public GameObject[] players;
+    public Sound footStep;
+    public Sound breath;
+    public Sound attack1;
+    public Sound attack2;
+    public float attackRate;
     public float detectableRange = 50f;
     public float maxAttackDistance = 4.5f;
     public float distanceOnStair=10f;
@@ -16,14 +21,24 @@ public class ZombieMove : MonoBehaviour
     [HideInInspector]public bool isHit;
     [HideInInspector]public Vector3 hitPosition;
     public int damage=10;
+<<<<<<< HEAD
 
+=======
+    /*public float speed=3.5f;
+    public float idleSpeed=1f;
+    public float wanderDistance=10f;*/
+    
+>>>>>>> master
 
+    
     private Vector3 position;
     private Vector3 groundCheck;
     private bool isOnStair;
     private bool isOnGround=true;
+    private bool isAttacking;
     private NavMeshAgent nma;
     private float distance;
+    private float nextAttackSound;
     private ZombieHealth health;
     private ZombieAttack attack;
     private float minDistance;
@@ -31,6 +46,7 @@ public class ZombieMove : MonoBehaviour
     private int targetNumber;
     private GameObject target;
     private int attackHash = Animator.StringToHash ("isAttack");
+    private int attackMode = 1; // Used to keep track of what attack
     private Animator anim;	
     private static float t=0f;
 
@@ -45,9 +61,12 @@ public class ZombieMove : MonoBehaviour
         nma = GetComponent <NavMeshAgent> ();
         anim = GetComponentInParent <Animator> ();
         stopDistanceOnGround = nma.stoppingDistance;
-
     }
 	
+    void Start()
+    {
+        StartCoroutine(BreathSound());
+    }
     // Update is called once per frame
     void Update ()
     {
@@ -108,9 +127,17 @@ public class ZombieMove : MonoBehaviour
 						nma.destination = players [targetNumber].transform.position;
 
                     }
+                    // If player isn't in range, then move randomly. Only want to set new destination when the zombie has stopped
+                    else if(nma.velocity.magnitude == 0){
+                        float radius = 50f;
+                        Vector3 point = transform.position + Random.insideUnitSphere * radius;
+                        NavMeshHit nh;
+                        NavMesh.SamplePosition(point, out nh, radius, NavMesh.AllAreas);
+                        nma.destination = nh.position;
+                    }
 				} else {
 					ResetPlayerList ();
-				}
+                }
 
 
 			} else {
@@ -127,7 +154,8 @@ public class ZombieMove : MonoBehaviour
     void Attack()
     {
         anim.SetBool (attackHash,true);
-
+        isAttacking = true;
+        TimedAttack();
     }
 
     void ChangeDistance()
@@ -142,6 +170,52 @@ public class ZombieMove : MonoBehaviour
         }
     }
 
-        
+    IEnumerator BreathSound()
+    {
+        while (health.currentHealth > 0)
+        {
+            yield return new WaitForSeconds(10);
+            if (health.currentHealth > 0)
+            {
+                breath.source.Play();
+            }
+        }
+    }
+    void TimedAttack()
+    {
+        if (Time.fixedTime > nextAttackSound)
+        {
+            AttackSound();
+            nextAttackSound = Time.fixedTime + attackRate;
+        }
+    }
+    private void AttackSound()
+    {
+        // Alternate attack
+        if (breath.source.isPlaying)
+        {
+            breath.source.Stop();
+        }
+        if (attackMode == 1)
+        {
+            if (!attack1.source.isPlaying || !attack2.source.isPlaying)
+            {
+                attack1.source.Play();
+                attackMode = 2;
+            }
+        }
+        else if (attackMode == 2)
+        {
+            if (!attack1.source.isPlaying || !attack2.source.isPlaying)
+            {
+                attack2.source.Play();
+                attackMode = 1;
+            }
+        }
+        else
+        {
+            Debug.Log("Error, please assign attackMode to either 1 or 2");
+        }
+    }
 
 }

@@ -41,9 +41,18 @@ public class ZombieHealth : MonoBehaviour
 			break;
 
 		}
-		Destroy(gameObject, disappearTime);
+        if (PhotonNetwork.connected && PhotonNetwork.isMasterClient)
+        {
+            // TODO: add delay here
+            PhotonNetwork.Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject, disappearTime);
+        }
+    }
 
-	}
+    [PunRPC]
     public void TakeDamage(int damage)
     {
         GameObject obj=GameObject.FindGameObjectWithTag ("Player");
@@ -51,6 +60,7 @@ public class ZombieHealth : MonoBehaviour
     }
 
 
+    
     //The zombie moves against the direction of the object ob hit it.
     public void TakeDamage(int damage,GameObject ob)
 	{
