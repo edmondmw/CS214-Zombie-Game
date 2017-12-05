@@ -20,6 +20,7 @@ public class Health : MonoBehaviour {
     [PunRPC]
     public void TakeDamage(int damage)
     {
+        Debug.Log("hurt");
         currentHealth -= damage;
         if (currentHealth <= 0)
         {

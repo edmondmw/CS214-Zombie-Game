@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     public Transform[] enemySpawns;
     public GameObject enemy;
-    int waveSize = 3;
+    int waveSize = 0;
     int numEnemies = 0;
 
 	// Use this for initialization

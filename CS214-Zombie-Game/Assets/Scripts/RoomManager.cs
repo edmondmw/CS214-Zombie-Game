@@ -9,7 +9,6 @@ public class RoomManager : Photon.MonoBehaviour {
     public bool isConnected = false; 
     public Transform spawnPoint;
     public GameObject player;
-    public GameObject enemy;
     
 
 	// Use this for initialization

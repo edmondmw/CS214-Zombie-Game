@@ -7,6 +7,11 @@ public class ZombieMove : MonoBehaviour
 {
 
     public GameObject[] players;
+    public Sound footStep;
+    public Sound breath;
+    public Sound attack1;
+    public Sound attack2;
+    public float attackRate;
     public float detectableRange = 50f;
     public float maxAttackDistance = 4.5f;
     public float distanceOnStair=10f;
@@ -19,13 +24,17 @@ public class ZombieMove : MonoBehaviour
     /*public float speed=3.5f;
     public float idleSpeed=1f;
     public float wanderDistance=10f;*/
+    
 
+    
     private Vector3 position;
     private Vector3 groundCheck;
     private bool isOnStair;
     private bool isOnGround=true;
+    private bool isAttacking;
     private NavMeshAgent nma;
     private float distance;
+    private float nextAttackSound;
     private ZombieHealth health;
     private ZombieAttack attack;
     private float minDistance;
@@ -33,6 +42,7 @@ public class ZombieMove : MonoBehaviour
     private int targetNumber;
     private GameObject target;
     private int attackHash = Animator.StringToHash ("isAttack");
+    private int attackMode = 1; // Used to keep track of what attack
     private Animator anim;	
     private static float t=0f;
 
@@ -47,9 +57,12 @@ public class ZombieMove : MonoBehaviour
         nma = GetComponent <NavMeshAgent> ();
         anim = GetComponentInParent <Animator> ();
         stopDistanceOnGround = nma.stoppingDistance;
-
     }
 	
+    void Start()
+    {
+        StartCoroutine(BreathSound());
+    }
     // Update is called once per frame
     void Update ()
     {
@@ -124,7 +137,6 @@ public class ZombieMove : MonoBehaviour
 
 
 			} else {
-                Debug.Log("stop!");
 				nma.Stop ();
 			}
 		}
@@ -138,7 +150,8 @@ public class ZombieMove : MonoBehaviour
     void Attack()
     {
         anim.SetBool (attackHash,true);
-
+        isAttacking = true;
+        TimedAttack();
     }
 
     void ChangeDistance()
@@ -153,6 +166,52 @@ public class ZombieMove : MonoBehaviour
         }
     }
 
-        
+    IEnumerator BreathSound()
+    {
+        while (health.currentHealth > 0)
+        {
+            yield return new WaitForSeconds(10);
+            if (health.currentHealth > 0)
+            {
+                breath.source.Play();
+            }
+        }
+    }
+    void TimedAttack()
+    {
+        if (Time.fixedTime > nextAttackSound)
+        {
+            AttackSound();
+            nextAttackSound = Time.fixedTime + attackRate;
+        }
+    }
+    private void AttackSound()
+    {
+        // Alternate attack
+        if (breath.source.isPlaying)
+        {
+            breath.source.Stop();
+        }
+        if (attackMode == 1)
+        {
+            if (!attack1.source.isPlaying || !attack2.source.isPlaying)
+            {
+                attack1.source.Play();
+                attackMode = 2;
+            }
+        }
+        else if (attackMode == 2)
+        {
+            if (!attack1.source.isPlaying || !attack2.source.isPlaying)
+            {
+                attack2.source.Play();
+                attackMode = 1;
+            }
+        }
+        else
+        {
+            Debug.Log("Error, please assign attackMode to either 1 or 2");
+        }
+    }
 
 }
