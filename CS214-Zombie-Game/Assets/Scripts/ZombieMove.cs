@@ -21,14 +21,8 @@ public class ZombieMove : MonoBehaviour
     [HideInInspector]public bool isHit;
     [HideInInspector]public Vector3 hitPosition;
     public int damage=10;
-<<<<<<< HEAD
-
-=======
-    /*public float speed=3.5f;
+    public float normalSpeed=3.5f;
     public float idleSpeed=1f;
-    public float wanderDistance=10f;*/
-    
->>>>>>> master
 
     
     private Vector3 position;
@@ -106,10 +100,10 @@ public class ZombieMove : MonoBehaviour
 						}
 					} 
 
-                    //Debug.Log (minDistance);
+                    Debug.Log (minDistance);
                     //Go and attack if in detectableRange
 					if (minDistance <= detectableRange) {
-
+                        nma.speed = normalSpeed;
 						if (minDistance <= maxAttackDistance) {
 							Vector3 direction = players [targetNumber].transform.position;
 							direction.y = position.y;
@@ -125,11 +119,16 @@ public class ZombieMove : MonoBehaviour
 						}
 
 						nma.destination = players [targetNumber].transform.position;
+                        if(!footStep.source.isPlaying){
+                            footStep.source.Play();
+
+                        }
 
                     }
                     // If player isn't in range, then move randomly. Only want to set new destination when the zombie has stopped
                     else if(nma.velocity.magnitude == 0){
                         float radius = 50f;
+                        nma.speed = idleSpeed;
                         Vector3 point = transform.position + Random.insideUnitSphere * radius;
                         NavMeshHit nh;
                         NavMesh.SamplePosition(point, out nh, radius, NavMesh.AllAreas);
