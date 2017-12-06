@@ -53,7 +53,7 @@ public class ZombieMove : MonoBehaviour
     {
         health = GetComponent<ZombieHealth> ();
         GetComponentInChildren<ZombieAttack> ().damage = damage;
-        ResetPlayerList ();
+        GetPlayers ();
         nma = GetComponent <NavMeshAgent> ();
         anim = GetComponentInParent <Animator> ();
         stopDistanceOnGround = nma.stoppingDistance;
@@ -149,18 +149,21 @@ public class ZombieMove : MonoBehaviour
 
 
             } else {
-                ResetPlayerList ();
+                GetPlayers ();
             } 
         } else {
             nma.Stop ();
         }
     }
 
-    void ResetPlayerList ()
+    private void GetPlayers()
     {
-        players = GameObject.FindGameObjectsWithTag ("Player");
+        players = PlayerList.GetPlayers ();
+
         playerNumber = players.Length;
     }
+        
+        
 
     void Attack ()
     {

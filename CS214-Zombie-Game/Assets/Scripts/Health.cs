@@ -38,5 +38,6 @@ public class Health : MonoBehaviour {
     {
         //TODO: do something else for players. Would probably want to play death anim here
         Destroy(gameObject);
+        PlayerList.ResetPlayerList ();
     }
 }
