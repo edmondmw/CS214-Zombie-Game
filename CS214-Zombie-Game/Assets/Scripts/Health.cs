@@ -24,7 +24,7 @@ public class Health : MonoBehaviour {
     {
         if(Time.time - lastHit >= 10)
         {
-            if (Time.time - lastHeal >= 1 && currentHealth < maxHealth)
+            if (Time.time - lastHeal >= 0.5f && currentHealth < maxHealth)
             {
                 currentHealth++;
                 lastHeal = Time.time;
@@ -34,7 +34,7 @@ public class Health : MonoBehaviour {
         }
     }
 
-    //[PunRPC]
+    [PunRPC]
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -53,6 +53,7 @@ public class Health : MonoBehaviour {
         lastHit = Time.time;
     }
 
+    [PunRPC]
     private void UpdateColor()
     {
         if (currentHealth < maxHealth * 1f / 3f)
@@ -69,6 +70,7 @@ public class Health : MonoBehaviour {
         }
     }
 
+    [PunRPC]
     void Die()
     {
         //TODO: do something else for players. Would probably want to play death anim here
