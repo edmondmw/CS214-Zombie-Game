@@ -8,6 +8,8 @@ public class Health : MonoBehaviour {
     public Text healthText;
 
     public int currentHealth = maxHealth;
+    private float lastHit;
+    private float lastHeal;
 
     private void Awake()
     {
@@ -17,10 +19,22 @@ public class Health : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if(Time.time - lastHit >= 10)
+        {
+            if (Time.time - lastHeal >= 1 && currentHealth < maxHealth)
+            {
+                currentHealth++;
+                lastHeal = Time.time;
+            }
+            healthText.text = currentHealth.ToString();
+        }
+    }
+
     [PunRPC]
     public void TakeDamage(int damage)
     {
-        Debug.Log("hurt");
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
@@ -32,6 +46,8 @@ public class Health : MonoBehaviour {
         {
             healthText.text = currentHealth.ToString();
         }
+
+        lastHit = Time.time;
     }
 
     void Die()
@@ -39,4 +55,5 @@ public class Health : MonoBehaviour {
         //TODO: do something else for players. Would probably want to play death anim here
         Destroy(gameObject);
     }
+
 }

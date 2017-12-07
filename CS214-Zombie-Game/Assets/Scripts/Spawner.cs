@@ -1,20 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Spawner : MonoBehaviour {
 
     public GameObject[] spawnLocations;
+    public static List<GameObject> Zombies = new List<GameObject>();
     public GameObject zombie;
     public int wave = 1;
-    int i = 0;
+
     private void Start()
     {
+        UpdateText();
         StartCoroutine(Spawn());
     }
 
     IEnumerator Spawn()
     {
+        UpdateText();
         float spawnTimer;
         if (1 - wave * 0.1f > 0.1f)
         {
@@ -28,6 +32,21 @@ public class Spawner : MonoBehaviour {
         {
             Instantiate(zombie, spawnLocations[Random.Range(0, spawnLocations.Length)].transform.position, Quaternion.identity);
             yield return new WaitForSeconds(spawnTimer);
+        }
+        wave++;
+        UpdateText();
+        Spawn();
+    }
+
+    public static void UpdateText()
+    {
+        if (PlayerController.players.Count > 0)
+        {
+            Debug.Log(PlayerController.players[0]);
+        }
+        else
+        {
+            Debug.Log("No Player");
         }
     }
 }

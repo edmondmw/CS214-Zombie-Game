@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+    public static List<PlayerController> players = new List<PlayerController>();
+
 
     public float walkSpeed = 5f;
     public float sprintSpeed = 10f;
@@ -35,8 +37,8 @@ public class PlayerController : MonoBehaviour {
         anim = transform.Find("MainCamera").Find("Arms").GetComponent<Animator>();
         nextAttack = Time.time;
 
-        // Audio
-
+        players.Add(this);
+        Spawner.UpdateText();
     }
 
     private void FixedUpdate()
