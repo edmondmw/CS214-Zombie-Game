@@ -38,11 +38,14 @@ public class Spawner : MonoBehaviour {
         Spawn();
     }
 
-    public static void UpdateText()
+    public void UpdateText()
     {
         if (PlayerController.players.Count > 0)
         {
-            Debug.Log(PlayerController.players[0]);
+            for (int i = 0; i < PlayerController.players.Count; i++)
+            {
+                PlayerController.players[i].UpdateWave(wave);
+            }
         }
         else
         {

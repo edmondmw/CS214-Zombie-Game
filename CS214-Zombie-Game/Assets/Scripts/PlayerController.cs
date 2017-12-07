@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     public static List<PlayerController> players = new List<PlayerController>();
@@ -28,6 +29,8 @@ public class PlayerController : MonoBehaviour {
     public Sound FootStepsSFX;
     public Sound SwingsSFX;
 
+    public Text wave;
+
 
     void Start ()
     {
@@ -38,7 +41,7 @@ public class PlayerController : MonoBehaviour {
         nextAttack = Time.time;
 
         players.Add(this);
-        Spawner.UpdateText();
+        UpdateWave(1);
     }
 
     private void FixedUpdate()
@@ -198,5 +201,9 @@ public class PlayerController : MonoBehaviour {
     private void SwingSound()
     {
         SwingsSFX.source.Play();
+    }
+    public void UpdateWave(int num)
+    {
+        wave.text = num.ToString();
     }
 }
