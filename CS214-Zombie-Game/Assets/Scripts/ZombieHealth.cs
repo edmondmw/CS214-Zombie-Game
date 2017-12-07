@@ -45,6 +45,7 @@ public class ZombieHealth : MonoBehaviour
 			break;
 
 		}
+
         if (PhotonNetwork.connected && PhotonNetwork.isMasterClient)
         {
             // TODO: add delay here

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour {
@@ -33,7 +34,7 @@ public class Health : MonoBehaviour {
         }
     }
 
-    [PunRPC]
+    //[PunRPC]
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -71,6 +72,14 @@ public class Health : MonoBehaviour {
     void Die()
     {
         //TODO: do something else for players. Would probably want to play death anim here
+        if (!PhotonNetwork.connected && !PhotonNetwork.isMasterClient)
+        {
+            SceneManager.LoadScene("ZedMenu");
+        }
+        if(PhotonNetwork.connected && PhotonNetwork.isMasterClient)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
         Destroy(gameObject);
     }
 

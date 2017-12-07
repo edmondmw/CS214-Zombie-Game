@@ -32,7 +32,14 @@ public class Spawner : MonoBehaviour {
         yield return new WaitForSeconds(4);
         for (int i = 0; i < wave * 5 + 1; i++)
         {
-            Instantiate(zombie, spawnLocations[Random.Range(0, spawnLocations.Length)].transform.position, Quaternion.identity);
+            if (PhotonNetwork.connected && PhotonNetwork.isMasterClient)
+            {
+                PhotonNetwork.Instantiate("NetworkedZombie", spawnLocations[Random.Range(0, spawnLocations.Length)].transform.position, Quaternion.identity, 0);
+            }
+            else
+            {
+                Instantiate(zombie, spawnLocations[Random.Range(0, spawnLocations.Length)].transform.position, Quaternion.identity);
+            }
             numZombies++;
             yield return new WaitForSeconds(spawnTimer);
         }
