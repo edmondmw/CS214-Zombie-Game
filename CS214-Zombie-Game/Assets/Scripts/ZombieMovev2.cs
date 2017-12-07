@@ -46,6 +46,7 @@ public class ZombieMove : MonoBehaviour
     private static float t = 0f;
     private float timer;
     private Vector3 targetPosition;
+    float radius = 50f;
 
 
     // Use this for initialization
@@ -131,7 +132,7 @@ public class ZombieMove : MonoBehaviour
 
                     // If player isn't in range, then move randomly. Only want to set new destination when the zombie has stopped
                     else if(nma.velocity.magnitude == 0){
-                        float radius = 50f;
+                        
                         Vector3 point = transform.position + Random.insideUnitSphere * radius;
                         NavMeshHit nh;
                         NavMesh.SamplePosition(point, out nh, radius, NavMesh.AllAreas);
