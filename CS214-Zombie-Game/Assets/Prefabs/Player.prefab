@@ -393,7 +393,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4208310948233576}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1335,7 +1335,7 @@ GameObject:
   - component: {fileID: 4040202785341538}
   - component: {fileID: 114791090598877656}
   - component: {fileID: 82955763677673012}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SwordSwing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1442,7 +1442,7 @@ GameObject:
   - component: {fileID: 4490073934158462}
   - component: {fileID: 114922948198838202}
   - component: {fileID: 82684015431466826}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FootSteps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3615,7 +3615,7 @@ MonoBehaviour:
   sprintSpeed: 10
   jumpForce: 250
   damage: 20
-  hitRange: 1.5
+  hitRange: 5
   attackDelay: 1
   isAttacking: 0
   FootStepsSFX: {fileID: 114922948198838202}
