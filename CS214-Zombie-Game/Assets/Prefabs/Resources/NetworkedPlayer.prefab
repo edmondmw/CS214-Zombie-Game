@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 4359735460744120}
   - component: {fileID: 33415752203557364}
   - component: {fileID: 23833028682764824}
+  - component: {fileID: 114239471241582142}
   m_Layer: 4
   m_Name: Sphere
   m_TagString: Untagged
@@ -1192,6 +1193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4398602328506664}
   - component: {fileID: 20801556565431244}
+  - component: {fileID: 114821183668157314}
   m_Layer: 4
   m_Name: MinimapCamera
   m_TagString: Untagged
@@ -4695,6 +4697,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &114239471241582142
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1375129284401374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ec375a75b33fb49820445e8397464f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1260980972635928}
 --- !u!114 &114287612629491000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4883,6 +4897,18 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &114821183668157314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1602123456827376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce0daafa6b89a24cbfe572fa4d6ccd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 4219236132055660}
 --- !u!114 &114845718309586180
 MonoBehaviour:
   m_ObjectHideFlags: 1

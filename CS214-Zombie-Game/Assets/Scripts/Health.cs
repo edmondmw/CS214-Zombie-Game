@@ -81,6 +81,7 @@ public class Health : MonoBehaviour {
         if(PhotonNetwork.connected && PhotonNetwork.isMasterClient)
         {
             PhotonNetwork.Destroy(gameObject);
+            SceneManager.LoadScene("ZedMenu");
         }
         Destroy(gameObject);
     }

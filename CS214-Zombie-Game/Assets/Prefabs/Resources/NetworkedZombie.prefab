@@ -339,6 +339,7 @@ GameObject:
   - component: {fileID: 4481005402846258}
   - component: {fileID: 33545288642866692}
   - component: {fileID: 23064168154677860}
+  - component: {fileID: 114505614499598818}
   m_Layer: 4
   m_Name: Sphere
   m_TagString: Untagged
@@ -1405,6 +1406,18 @@ MonoBehaviour:
   hitBackward: 5
   id: 0
   beingSlashed: {fileID: 114945183818501310}
+--- !u!114 &114505614499598818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1673905167117790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ec375a75b33fb49820445e8397464f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1579594135984342}
 --- !u!114 &114514822598080584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1453,8 +1466,8 @@ MonoBehaviour:
   - {fileID: 114262941392150154}
   - {fileID: 114748582257922584}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 1
+  instantiationId: 1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114748582257922584
