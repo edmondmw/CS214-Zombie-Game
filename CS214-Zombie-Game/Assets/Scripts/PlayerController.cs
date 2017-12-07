@@ -141,6 +141,13 @@ public class PlayerController : MonoBehaviour {
             grounded = true;
         }
     }
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            grounded = true;
+        }
+    }
 
     void OnCollisionExit(Collision collision)
     {
