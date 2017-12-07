@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class Spawner : MonoBehaviour {
 
     public GameObject[] spawnLocations;
-    public static List<GameObject> Zombies = new List<GameObject>();
+    public static int numZombies;
     public GameObject zombie;
     public int wave = 1;
+    public bool gameOver;
 
     private void Start()
     {
@@ -28,10 +29,16 @@ public class Spawner : MonoBehaviour {
         {
             spawnTimer = 0.1f;
         }
-        for (int i = 0; i < wave * 10; i++)
+        yield return new WaitForSeconds(4);
+        for (int i = 0; i < wave * 5 + 1; i++)
         {
             Instantiate(zombie, spawnLocations[Random.Range(0, spawnLocations.Length)].transform.position, Quaternion.identity);
+            numZombies++;
             yield return new WaitForSeconds(spawnTimer);
+        }
+        while (numZombies > 0)
+        {
+            yield return new WaitForSeconds(1);
         }
         wave++;
         UpdateText();

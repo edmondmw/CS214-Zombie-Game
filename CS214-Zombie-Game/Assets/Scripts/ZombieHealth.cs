@@ -10,6 +10,8 @@ public class ZombieHealth : MonoBehaviour
 	public float disappearTime = 10;
     public float hitBackward=5f;
 
+    public int id;
+
 	private Animator anim;
 	private ZombieMove zm;
 
@@ -26,6 +28,8 @@ public class ZombieHealth : MonoBehaviour
 	//Play a random dead animation and destroy the zombie after disappearTime.
 	void Death()
 	{
+        Spawner.numZombies--;
+
 		int deadStyle = Random.Range(0, 3);
 
 		switch (deadStyle)
