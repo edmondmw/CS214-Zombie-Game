@@ -679,7 +679,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1555740704337484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.149382, y: 0.05, z: 15.995159}
+  m_LocalPosition: {x: 436.94, y: 116.82, z: 686.89}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4452088085807242}
@@ -1386,7 +1386,7 @@ MonoBehaviour:
   attack1: {fileID: 114594577880403112}
   attack2: {fileID: 114346326296845558}
   attackRate: 0
-  detectableRange: 50
+  detectableRange: 20
   maxAttackDistance: 4.5
   distanceOnStair: 10
   distanceOnGround: 4.5

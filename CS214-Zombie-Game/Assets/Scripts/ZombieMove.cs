@@ -170,7 +170,7 @@ public class ZombieMove : MonoBehaviour
     {
         while (health.currentHealth > 0)
         {
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(Random.Range(10,50));
             if (health.currentHealth > 0)
             {
                 breath.source.Play();

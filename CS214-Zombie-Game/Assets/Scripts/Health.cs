@@ -27,6 +27,7 @@ public class Health : MonoBehaviour {
             {
                 currentHealth++;
                 lastHeal = Time.time;
+                UpdateColor();
             }
             healthText.text = currentHealth.ToString();
         }
