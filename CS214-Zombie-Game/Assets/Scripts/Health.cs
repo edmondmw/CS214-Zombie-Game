@@ -41,13 +41,30 @@ public class Health : MonoBehaviour {
             currentHealth = 0;
             Die();
         }
-
+        
         if(healthText != null)
         {
             healthText.text = currentHealth.ToString();
         }
+        UpdateColor();
 
         lastHit = Time.time;
+    }
+
+    private void UpdateColor()
+    {
+        if (currentHealth < maxHealth * 1f / 3f)
+        {
+            healthText.color = Color.red;
+        }
+        else if (currentHealth <= maxHealth * 2f / 3f)
+        {
+            healthText.color = Color.yellow;
+        }
+        else if (currentHealth >= maxHealth * 2f / 3f)
+        {
+            healthText.color = Color.green;
+        }
     }
 
     void Die()
