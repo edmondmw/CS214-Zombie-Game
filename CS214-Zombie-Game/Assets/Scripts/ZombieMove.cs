@@ -24,7 +24,7 @@ public class ZombieMove : MonoBehaviour
 	public int damage = 10;
 	public float idleSpeed = 0.05f;
 	public float wanderingChangeTime = 10f;
-
+	private PhotonView pv;
 
 	private Vector3 position;
 	private Vector3 groundCheck;
@@ -57,6 +57,8 @@ public class ZombieMove : MonoBehaviour
 		nma = GetComponent <NavMeshAgent> ();
 		anim = GetComponentInParent <Animator> ();
 		stopDistanceOnGround = nma.stoppingDistance;
+		pv = GetComponent<PhotonView> ();
+
 	}
 
 	void Start ()
@@ -66,6 +68,9 @@ public class ZombieMove : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		if (pv != null && !pv.isMine)
+			return;
+
 		position = transform.position;
 		if (playerNumber > 0 && health.currentHealth > 0) {
 			targetNumber = 0;
