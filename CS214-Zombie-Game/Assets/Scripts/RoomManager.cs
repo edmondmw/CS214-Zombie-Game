@@ -5,16 +5,16 @@ using UnityEngine;
 public class RoomManager : Photon.MonoBehaviour {
 
     public string versionNum = "0.1";
-    public string roomName = "roomA";
     public bool isConnected = false; 
     public Transform spawnPoint;
     public GameObject player;
-    
+
+    private string roomName;
 
 	// Use this for initialization
 	void Start ()
     {
-        PhotonNetwork.ConnectUsingSettings(versionNum);
+        Debug.Log(PhotonNetwork.ConnectUsingSettings(versionNum));
 
         // Make sure the random room name doesn't already exist. Temp solution. If there are 1000 rooms then this would get stuck
         bool roomNameExists = false;
@@ -34,6 +34,7 @@ public class RoomManager : Photon.MonoBehaviour {
         } while (roomNameExists);
 
         Debug.Log("Starting connection");
+        isConnected = PhotonNetwork.connected;
     }
 
     public void OnJoinedLobby()
@@ -47,8 +48,9 @@ public class RoomManager : Photon.MonoBehaviour {
         Debug.Log("Joined room");
         // Disable the lobby camera once we join a room since we can use the first person camera
         GameObject.Find("LobbyCamera").gameObject.SetActive(false);
-        GetComponent<SpawnManager>().enabled = true;
+        GetComponent<GameManager>().enabled = true;
         isConnected = false;
+        PhotonNetwork.automaticallySyncScene = true;
         PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
         //aZombie.GetComponent<ZombieMove>().players[0] = aPlayer;
     }

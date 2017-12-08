@@ -4562,10 +4562,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
-  sprintSpeed: 10
+  sprintSpeed: 8
   jumpForce: 300
-  damage: 20
-  hitRange: 1.5
+  damage: 35
+  hitRange: 4
   attackDelay: 1
   isAttacking: 0
   FootStepsSFX: {fileID: 114336769434198940}

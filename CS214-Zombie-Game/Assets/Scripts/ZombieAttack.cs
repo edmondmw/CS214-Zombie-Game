@@ -7,16 +7,17 @@ public class ZombieAttack : MonoBehaviour {
 
 
 	void OnTriggerEnter(Collider other){
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (PhotonNetwork.connected)
+            {
+                other.transform.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);
+            }
+            else
+            {
+                other.GetComponent<Health>().TakeDamage(damage);
+            }
+        }
 
-
-			if(other.gameObject.CompareTag ("Player")) 
-			{
-
-				other.GetComponent<Health>().TakeDamage (damage);
-
-		}
 	}
-
-
-
 }

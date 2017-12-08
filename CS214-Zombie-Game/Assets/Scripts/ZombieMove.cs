@@ -66,6 +66,11 @@ public class ZombieMove : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        if(PhotonNetwork.connected)
+        {
+            if (!PhotonNetwork.isMasterClient)
+                return;
+        }
         position = transform.position;
         if (playerNumber > 0 && health.currentHealth > 0) {
             targetNumber = 0;

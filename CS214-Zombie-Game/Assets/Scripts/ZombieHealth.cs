@@ -41,10 +41,11 @@ public class ZombieHealth : MonoBehaviour
 			break;
 
 		}
+
+        GameObject.Find("GameManager").GetComponent<GameManager>().decrementNumEnemies();
         if (PhotonNetwork.connected && PhotonNetwork.isMasterClient)
         {
-            // TODO: add delay here
-            PhotonNetwork.Destroy(gameObject);
+            StartCoroutine(DestroyFromNetwork());
         }
         else
         {
@@ -56,14 +57,26 @@ public class ZombieHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         GameObject obj=GameObject.FindGameObjectWithTag ("Player");
-        TakeDamage (damage,obj);
+        beingSlashed.source.Play();
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Death();
+        }
+        else
+        {
+            zm.hitPosition = transform.position + (transform.position - obj.transform.position).normalized * hitBackward;
+            zm.isHit = true;
+
+        }
     }
 
 
-    
+
     //The zombie moves against the direction of the object ob hit it.
-    public void TakeDamage(int damage,GameObject ob)
+    public void TakeDamage(int damage, GameObject ob)
 	{
+        Debug.Log("rpc called");
         beingSlashed.source.Play();
 		currentHealth -= damage;
 		if (currentHealth <= 0) {
@@ -75,9 +88,11 @@ public class ZombieHealth : MonoBehaviour
 		}
 	}
 
+    IEnumerator DestroyFromNetwork()
+    {
+        yield return new WaitForSeconds(disappearTime);
 
-
-
-    
+        PhotonNetwork.Destroy(gameObject);
+    }
 }
 

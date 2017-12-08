@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieMove : MonoBehaviour
+public class ZombieMovev2 : MonoBehaviour
 {
 
     public GameObject[] players;

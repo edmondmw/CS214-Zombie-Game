@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour {
     public const int maxHealth = 100;
@@ -20,7 +21,6 @@ public class Health : MonoBehaviour {
     [PunRPC]
     public void TakeDamage(int damage)
     {
-        Debug.Log("hurt");
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
@@ -36,8 +36,13 @@ public class Health : MonoBehaviour {
 
     void Die()
     {
-        //TODO: do something else for players. Would probably want to play death anim here
+        //PhotonNetwork.Destroy(gameObject);
         Destroy(gameObject);
-        PlayerList.ResetPlayerList ();
+        PhotonView pv = GetComponent<PhotonView>();
+        if (pv != null && pv.isMine)
+        {
+            PhotonNetwork.Disconnect();
+            SceneManager.LoadScene(0);
+        }
     }
 }
