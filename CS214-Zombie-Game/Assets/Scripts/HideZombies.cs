@@ -18,6 +18,8 @@ public class HideZombies : MonoBehaviour {
 	{
 		if (c.CompareTag ("Enemy")) {
 			zombiePoint = (GameObject)Instantiate (box, c.transform.position,c.transform.rotation);
+
+			//zombiePoint = ObjectPooler.SharedInstance.GetPooledObject ("Box");
 			zombiePoint.GetComponent <StoreRelease> ().Store (c.gameObject);
 		}
 				
