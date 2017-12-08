@@ -12,7 +12,6 @@ public class ZombieMove : MonoBehaviour
     public Sound attack1;
     public Sound attack2;
     public float attackRate;
-    public float notActiveDistance = 80f;
     public float detectableRange = 20f;
     public float maxAttackDistance = 4.5f;
     public float distanceOnStair = 10f;
