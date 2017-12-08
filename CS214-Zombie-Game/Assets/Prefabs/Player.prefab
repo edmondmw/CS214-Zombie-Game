@@ -3017,7 +3017,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 528
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 977936cf1093e4a9e81285ee7e0cfb07, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 263f2a6bc78114f7cabd18804b5590bb, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -3165,7 +3165,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 585a9617dcdd44209b7878a3cd612e2c, type: 2}
+  - {fileID: 2100000, guid: 1e75628989aec4c00a1429d4da3440a3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3804,10 +3804,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1339331649855394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13e7e3e147b9f4a90a069219c22edc61, type: 3}
+  m_Script: {fileID: 11500000, guid: ebbaf708fe22e49948a0c14449885cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1503048170845164}
+  player: {fileID: 0}
 --- !u!114 &114654238290295100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3917,7 +3917,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 8400000, guid: 977936cf1093e4a9e81285ee7e0cfb07, type: 2}
+  m_Texture: {fileID: 8400000, guid: 263f2a6bc78114f7cabd18804b5590bb, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0

@@ -1414,10 +1414,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1381494595118282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13e7e3e147b9f4a90a069219c22edc61, type: 3}
+  m_Script: {fileID: 11500000, guid: ebbaf708fe22e49948a0c14449885cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1555740704337484}
+  player: {fileID: 0}
 --- !u!114 &114328372052686424
 MonoBehaviour:
   m_ObjectHideFlags: 1

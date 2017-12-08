@@ -22,41 +22,35 @@ public class Spawner : MonoBehaviour {
 
     IEnumerator Spawn()
     {
-        UpdateText();
-        float spawnTimer;
-        if (1 - wave * 0.1f > 0.1f)
-        {
-            spawnTimer = 2 - wave * 0.1f;
-        }
-        else
-        {
-            spawnTimer = 0.1f;
-        }
-        yield return new WaitForSeconds(4);
-        for (int i = 0; i < wave * 5 + 1; i++)
-        {
-            if (PhotonNetwork.connected && PhotonNetwork.isMasterClient)
-            {
-                PhotonNetwork.Instantiate("NetworkedZombie", spawnLocations[Random.Range(0, spawnLocations.Length)].transform.position, Quaternion.identity, 0);
-            }
-            else
-            {
-                Instantiate(zombie, spawnLocations[Random.Range(0, spawnLocations.Length)].transform.position, Quaternion.identity);
-            }
-            numZombies++;
-            yield return new WaitForSeconds(spawnTimer);
-        }
-        while (numZombies > 0)
-        {
-            yield return new WaitForSeconds(1);
-        }
-        wave++;
-        UpdateText();
-        Spawn();
+		while (true) 
+		{
+			UpdateText ();
+			float spawnTimer;
+			if (1 - wave * 0.1f > 0.1f) {
+				spawnTimer = 2 - wave * 0.1f;
+			} else {
+				spawnTimer = 0.1f;
+			}
+			yield return new WaitForSeconds (4);
+			for (int i = 0; i < wave * 5 + 1; i++) {
+				if (PhotonNetwork.connected && PhotonNetwork.isMasterClient) {
+					PhotonNetwork.Instantiate ("NetworkedZombie", spawnLocations [Random.Range (0, spawnLocations.Length)].transform.position, Quaternion.identity, 0);
+				} else {
+					Instantiate (zombie, spawnLocations [Random.Range (0, spawnLocations.Length)].transform.position, Quaternion.identity);
+				}
+				numZombies++;
+				yield return new WaitForSeconds (spawnTimer);
+			}
+			while (numZombies > 0) {
+				yield return new WaitForSeconds (1);
+			}
+			wave++;
+		}
     }
 
     public void UpdateText()
     {
+		Debug.Log ("update text");
         if (PlayerController.players.Count > 0)
         {
             for (int i = 0; i < PlayerController.players.Count; i++)
@@ -68,5 +62,6 @@ public class Spawner : MonoBehaviour {
         {
             Debug.Log("No Player");
         }
+		Debug.Log ("leave ut");
     }
 }
