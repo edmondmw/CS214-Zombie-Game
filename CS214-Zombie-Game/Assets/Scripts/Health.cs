@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour {
     public const int maxHealth = 100;
@@ -78,12 +79,16 @@ public class Health : MonoBehaviour {
         {
             SceneManager.LoadScene("ZedMenu");
         }
-        if(PhotonNetwork.connected && PhotonNetwork.isMasterClient)
-        {
-            PhotonNetwork.Destroy(gameObject);
-            SceneManager.LoadScene("ZedMenu");
-        }
+
+        
+        
         Destroy(gameObject);
+        PhotonView pv = GetComponent<PhotonView>();
+        if (pv != null && pv.isMine)
+        {
+            PhotonNetwork.Disconnect();
+            SceneManager.LoadScene(0);
+        }
     }
 
 }

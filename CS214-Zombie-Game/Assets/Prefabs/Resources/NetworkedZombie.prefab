@@ -226,7 +226,7 @@ GameObject:
   - component: {fileID: 114748582257922584}
   m_Layer: 0
   m_Name: NetworkedZombie
-  m_TagString: Enemy
+  m_TagString: NetworkedEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -703,7 +703,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1579594135984342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.951309, y: 0.05, z: -8.856754}
+  m_LocalPosition: {x: 466.2983, y: 121.6, z: 744.2411}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4596571478247040}
@@ -1403,7 +1403,7 @@ MonoBehaviour:
   startingHealth: 100
   currentHealth: 0
   disappearTime: 10
-  hitBackward: 5
+  hitBackward: 2
   id: 0
   beingSlashed: {fileID: 114945183818501310}
 --- !u!114 &114505614499598818
@@ -1414,7 +1414,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1673905167117790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98ec375a75b33fb49820445e8397464f, type: 3}
+  m_Script: {fileID: 11500000, guid: 13e7e3e147b9f4a90a069219c22edc61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1579594135984342}
@@ -1442,7 +1442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026d5569e3ae1fd478e13c45ef99b3cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 2
 --- !u!114 &114559195546767982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1466,8 +1466,8 @@ MonoBehaviour:
   - {fileID: 114262941392150154}
   - {fileID: 114748582257922584}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 1
-  instantiationId: 1
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114748582257922584
@@ -1501,7 +1501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026d5569e3ae1fd478e13c45ef99b3cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 2
 --- !u!114 &114781500059178294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1520,7 +1520,7 @@ MonoBehaviour:
   attack1: {fileID: 114311209449992678}
   attack2: {fileID: 114213786743871392}
   attackRate: 0
-  detectableRange: 50
+  detectableRange: 30
   maxAttackDistance: 4.5
   distanceOnStair: 10
   distanceOnGround: 4.5
@@ -1528,7 +1528,7 @@ MonoBehaviour:
   stopDistanceOnGround: 0
   isHit: 0
   hitPosition: {x: 0, y: 0, z: 0}
-  damage: 10
+  damage: 5
 --- !u!114 &114945183818501310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2294,7 +2294,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1579594135984342}
   m_Enabled: 1
   m_Radius: 0.3
-  m_Speed: 3.5
+  m_Speed: 5.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
