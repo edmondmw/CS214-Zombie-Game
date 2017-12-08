@@ -70,7 +70,7 @@ public class ZombieMove : MonoBehaviour
 	{
 		if (pv != null && !pv.isMine)
 			return;
-
+		GetPlayers ();
 		position = transform.position;
 		if (playerNumber > 0 && health.currentHealth > 0) {
 			targetNumber = 0;
