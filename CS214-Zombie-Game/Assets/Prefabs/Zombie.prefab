@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 33701573939967700}
   - component: {fileID: 135559475114508586}
   - component: {fileID: 23473714428755478}
+  - component: {fileID: 114215176065819508}
   m_Layer: 4
   m_Name: Sphere
   m_TagString: Untagged
@@ -1390,6 +1391,7 @@ MonoBehaviour:
   currentHealth: 0
   disappearTime: 10
   hitBackward: 5
+  id: 0
   beingSlashed: {fileID: 114008305729931782}
 --- !u!114 &114168083241299910
 MonoBehaviour:
@@ -1404,6 +1406,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 82931225006779112}
   clip: {fileID: 8300000, guid: c0a02d9c782ccfe4d8a97ef1ff4c5983, type: 3}
+--- !u!114 &114215176065819508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1381494595118282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e7e3e147b9f4a90a069219c22edc61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1555740704337484}
 --- !u!114 &114328372052686424
 MonoBehaviour:
   m_ObjectHideFlags: 1

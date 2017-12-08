@@ -307,7 +307,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1155869955139514
 GameObject:
   m_ObjectHideFlags: 1
@@ -531,8 +531,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4048175006206338}
   - component: {fileID: 33219489947486942}
-  - component: {fileID: 135143948560626818}
   - component: {fileID: 23349873562141548}
+  - component: {fileID: 114538697164102130}
   m_Layer: 4
   m_Name: Sphere
   m_TagString: Untagged
@@ -626,6 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4071938995305086}
   - component: {fileID: 20478829138642996}
+  - component: {fileID: 114654238290295100}
   m_Layer: 0
   m_Name: MinimapCamera
   m_TagString: Untagged
@@ -2945,7 +2946,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503048170845164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 435.3, y: 120.4, z: 676}
+  m_LocalPosition: {x: 435.3, y: 120.4, z: 732.4}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4582820157150154}
@@ -3016,7 +3017,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 528
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 7c43892adf066264f810edb3b7baf66a, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 977936cf1093e4a9e81285ee7e0cfb07, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -3158,13 +3159,13 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1339331649855394}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 585a9617dcdd44209b7878a3cd612e2c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3795,6 +3796,29 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114538697164102130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339331649855394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e7e3e147b9f4a90a069219c22edc61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1503048170845164}
+--- !u!114 &114654238290295100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1396389975703500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114718714369902578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3893,7 +3917,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 8400000, guid: 7c43892adf066264f810edb3b7baf66a, type: 2}
+  m_Texture: {fileID: 8400000, guid: 977936cf1093e4a9e81285ee7e0cfb07, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -3963,7 +3987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 7
   sprintSpeed: 10
-  jumpForce: 250
+  jumpForce: 150
   damage: 20
   hitRange: 5
   attackDelay: 1
@@ -3978,18 +4002,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1035748422125244}
   m_Enabled: 1
---- !u!135 &135143948560626818
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1339331649855394}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136777905241161596
 CapsuleCollider:
   m_ObjectHideFlags: 1
