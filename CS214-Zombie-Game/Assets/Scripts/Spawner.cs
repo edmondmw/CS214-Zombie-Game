@@ -13,8 +13,11 @@ public class Spawner : MonoBehaviour {
 
     private void Start()
     {
-        UpdateText();
-        StartCoroutine(Spawn());
+		if (!PhotonNetwork.connected || PhotonNetwork.isMasterClient) 
+		{
+			UpdateText ();
+			StartCoroutine (Spawn ());
+		}
     }
 
     IEnumerator Spawn()

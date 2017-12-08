@@ -47,7 +47,7 @@ public class ZombieHealth : MonoBehaviour
 		}
 
 
-        GameObject.Find("GameManager").GetComponent<GameManager>().decrementNumEnemies();
+        //GameObject.Find("GameManager").GetComponent<GameManager>().decrementNumEnemies();
 
         if (PhotonNetwork.connected && PhotonNetwork.isMasterClient)
         {

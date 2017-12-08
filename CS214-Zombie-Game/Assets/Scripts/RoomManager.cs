@@ -48,10 +48,12 @@ public class RoomManager : Photon.MonoBehaviour {
         Debug.Log("Joined room");
         // Disable the lobby camera once we join a room since we can use the first person camera
         GameObject.Find("LobbyCamera").gameObject.SetActive(false);
-        GetComponent<GameManager>().enabled = true;
+        GetComponent<Spawner>().enabled = true;
         isConnected = false;
         PhotonNetwork.automaticallySyncScene = true;
-        PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
+		GameObject player =  PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0) as GameObject;
+		player.transform.Find ("Canvas").Find ("MinimapBorder").gameObject.SetActive (true);
+		player.transform.Find ("Minimap").gameObject.SetActive (true);
         //aZombie.GetComponent<ZombieMove>().players[0] = aPlayer;
     }
 
