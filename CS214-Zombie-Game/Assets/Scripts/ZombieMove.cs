@@ -82,10 +82,6 @@ public class ZombieMove : MonoBehaviour
                     }
                 }
                 Debug.Log (minDistance);
-                //DO nothing if the distance is far.
-                if (minDistance > notActiveDistance) {
-                    return;
-                }
                 if (isHit) {
 
                     transform.position = new Vector3 (Mathf.Lerp (position.x, hitPosition.x, t), position.y, Mathf.Lerp (position.z, hitPosition.z, t));
