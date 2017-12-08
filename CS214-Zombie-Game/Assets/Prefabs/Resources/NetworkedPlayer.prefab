@@ -4348,8 +4348,8 @@ MonoBehaviour:
   - {fileID: 114759258788385950}
   - {fileID: 114287612629491000}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 1
-  instantiationId: 1
+  viewIdField: 0
+  instantiationId: -1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &114092100877643580
@@ -4562,10 +4562,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
-  sprintSpeed: 10
+  sprintSpeed: 8
   jumpForce: 300
-  damage: 20
-  hitRange: 1.5
+  damage: 35
+  hitRange: 4
   attackDelay: 1
   isAttacking: 0
   FootStepsSFX: {fileID: 114336769434198940}

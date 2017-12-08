@@ -66,6 +66,11 @@ public class ZombieMove : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
+        if(PhotonNetwork.connected)
+        {
+            if (!PhotonNetwork.isMasterClient)
+                return;
+        }
         position = transform.position;
         groundCheck=position+new Vector3(0,-0.2f,0); 
         isOnStair = Physics.Linecast (position, groundCheck, 1 << LayerMask.NameToLayer ("Stair"));

@@ -24,6 +24,7 @@ public class NetworkPlayer : Photon.MonoBehaviour
         else
         {
             transform.Find("MainCamera").gameObject.SetActive(false);
+            transform.Find("Canvas").gameObject.SetActive(false);
             GetComponent<PlayerController>().enabled = false;
             graphicAnim = transform.Find("Graphic").GetComponent<Animator>();
         }
@@ -31,6 +32,7 @@ public class NetworkPlayer : Photon.MonoBehaviour
 
     private void Update()
     {
+        // Animate remote player controlled characters
         if (!pv.isMine)
         {
             if (graphicAnim)
