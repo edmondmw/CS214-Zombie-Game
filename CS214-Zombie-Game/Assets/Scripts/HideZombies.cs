@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HideZombies : MonoBehaviour {
 
-	public GameObject box;
+	public GameObject zombiePointPrefab;
 	private GameObject zombiePoint;
 	void OnTriggerEnter(Collider c)
 	{
@@ -17,9 +17,9 @@ public class HideZombies : MonoBehaviour {
 	void OnTriggerExit(Collider c)
 	{
 		if (c.CompareTag ("Enemy")) {
-			zombiePoint = (GameObject)Instantiate (box, c.transform.position,c.transform.rotation);
+            //zombiePoint = (GameObject)Instantiate (zombiePointPrefab, c.transform.position,c.transform.rotation);
 
-			//zombiePoint = ObjectPooler.SharedInstance.GetPooledObject ("Box");
+			zombiePoint = ObjectPooler.SharedInstance.GetPooledObject ("Box");
 			zombiePoint.GetComponent <StoreRelease> ().Store (c.gameObject);
 		}
 				

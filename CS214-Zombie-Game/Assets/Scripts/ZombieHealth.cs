@@ -43,14 +43,11 @@ public class ZombieHealth : MonoBehaviour
 		}
 
         GameObject.Find("GameManager").GetComponent<GameManager>().decrementNumEnemies();
-        if (PhotonNetwork.connected && PhotonNetwork.isMasterClient)
-        {
-            StartCoroutine(DestroyFromNetwork());
-        }
-        else
-        {
-            Destroy(gameObject, disappearTime);
-        }
+        //if (PhotonNetwork.connected && PhotonNetwork.isMasterClient){
+        StartCoroutine(DestroyFromNetwork());
+        //}        else        {
+            //Destroy(gameObject, disappearTime);
+        //}
     }
 
     [PunRPC]
@@ -92,7 +89,8 @@ public class ZombieHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(disappearTime);
 
-        PhotonNetwork.Destroy(gameObject);
+        //PhotonNetwork.Destroy(gameObject);
+        gameObject.SetActive (false);
     }
 }
 
