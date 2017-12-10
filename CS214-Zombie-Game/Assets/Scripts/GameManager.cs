@@ -57,8 +57,8 @@ public class GameManager : MonoBehaviour
             /* Use it to replace Instantiate():
              * enemy = ObjectPooler.SharedInstance.GetPooledObject("Enemy"); 
             if (enemy != null) {
-                enemy.transform.position = enemySpawns[j].transform.position;
-                enemy.transform.rotation = enemySpawns[j].transform.rotation;
+                enemy.transform.position = enemySpawns[0].transform.position;
+                enemy.transform.rotation = enemySpawns[0].transform.rotation;
                 enemy.GetComponent<ZombieHealth> ().currentHealth = enemy.GetComponent<ZombieHealth> ().startingHealth;
                 enemy.SetActive (true);
             }*/

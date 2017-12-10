@@ -192,10 +192,12 @@ public class ZombieMove : MonoBehaviour
 
     IEnumerator BreathSound ()
     {
-        while (health.currentHealth > 0) {
-            yield return new WaitForSeconds (10);
-            if (health.currentHealth > 0) {
-                breath.source.Play ();
+        while (health.currentHealth > 0)
+        {
+            yield return new WaitForSeconds(Random.Range(10,50));
+            if (health.currentHealth > 0)
+            {
+                breath.source.Play();
             }
         }
     }

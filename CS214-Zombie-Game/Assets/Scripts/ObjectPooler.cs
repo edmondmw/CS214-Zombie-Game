@@ -36,27 +36,27 @@ public class ObjectPooler : MonoBehaviour {
 		}
 	}
 	
-	public GameObject GetPooledObject(string tag) {
-		for (int i = 0; i < pooledObjects.Count; i++) {
-			if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].tag == tag) {
-				return pooledObjects[i];
-			}
-		}
-		foreach (ObjectPoolItem item in itemsToPool) {
-			if (item.objectToPool.tag == tag) {
-				if (item.shouldExpand) {
+    public GameObject GetPooledObject(string tag) {
+        for (int i = 0; i < pooledObjects.Count; i++) {
+            if (!pooledObjects[i].activeInHierarchy && pooledObjects[i].tag == tag) {
+                return pooledObjects[i];
+            }
+        }
+        foreach (ObjectPoolItem item in itemsToPool) {
+            if (item.objectToPool.tag == tag) {
+                if (item.shouldExpand) {
                     return AddObject (item);
-				}
-			}
-		}
-		return null;
-	}
+                }
+            }
+        }
+        return null;
+    }
 
     private GameObject AddObject(ObjectPoolItem item)
     {
         if(isMultipleMode)
         {
-            obj = PhotonNetwork.Instantiate(item.objectToPool);
+            obj = PhotonNetwork.Instantiate(item.objectToPool.tag,Vector3.zero,Quaternion.identity,0);
         }else{
             obj = (GameObject)Instantiate(item.objectToPool);
         }
