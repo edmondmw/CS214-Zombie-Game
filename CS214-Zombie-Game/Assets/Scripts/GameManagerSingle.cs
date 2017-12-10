@@ -46,7 +46,8 @@ public class GameManagerSingle : MonoBehaviour
             enemy.transform.rotation = enemySpawns[0].transform.rotation;
             enemy.GetComponent<ZombieHealth> ().currentHealth = enemy.GetComponent<ZombieHealth> ().startingHealth;
             enemy.SetActive (true);
-            }}
+            }
+        }
         //numEnemies = waveSize;
         yield return null;
         //yield return new WaitForSeconds(10f);

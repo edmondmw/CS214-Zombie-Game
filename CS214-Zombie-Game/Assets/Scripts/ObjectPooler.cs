@@ -18,6 +18,9 @@ public class ObjectPooler : MonoBehaviour {
 	public List<GameObject> pooledObjects;
 	public GameObject objectToPool;
 	public int amountToPool;
+    private GameObject obj;
+
+    public bool isMultipleMode;
 
 	void Awake() {
 		SharedInstance = this;
@@ -28,9 +31,7 @@ public class ObjectPooler : MonoBehaviour {
 		pooledObjects = new List<GameObject>();
 		foreach (ObjectPoolItem item in itemsToPool) {
 			for (int i = 0; i < item.amountToPool; i++) {
-				GameObject obj = (GameObject)Instantiate(item.objectToPool);
-				obj.SetActive(false);
-				pooledObjects.Add(obj);
+                AddObject (item);
 			}
 		}
 	}
@@ -44,32 +45,23 @@ public class ObjectPooler : MonoBehaviour {
 		foreach (ObjectPoolItem item in itemsToPool) {
 			if (item.objectToPool.tag == tag) {
 				if (item.shouldExpand) {
-					GameObject obj = (GameObject)Instantiate(item.objectToPool);
-					obj.SetActive(false);
-					pooledObjects.Add(obj);
-					return obj;
+                    return AddObject (item);
 				}
 			}
 		}
 		return null;
 	}
 
-
-
-	/*Instantiate(playerBullet, turret.transform.position, turret.transform.rotation);
-	 * 
-	 * replace by 
-	 * 
-	 * GameObject bullet = ObjectPooler.SharedInstance.GetPooledObject(); 
-  *if (bullet != null) {
-   * bullet.transform.position = turret.transform.position;
-    *bullet.transform.rotation = turret.transform.rotation;
-   * bullet.SetActive(true);
-  *}
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * */
+    private GameObject AddObject(ObjectPoolItem item)
+    {
+        if(isMultipleMode)
+        {
+            obj = PhotonNetwork.Instantiate(item.objectToPool);
+        }else{
+            obj = (GameObject)Instantiate(item.objectToPool);
+        }
+        obj.SetActive(false);
+        pooledObjects.Add(obj);
+        return obj;
+    }
 }
