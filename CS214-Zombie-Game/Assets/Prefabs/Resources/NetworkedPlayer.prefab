@@ -2431,7 +2431,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1260980972635928}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 434.55838, y: 121.01, z: 700.0847}
+  m_LocalPosition: {x: 445.82974, y: 115.76634, z: 738.98254}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4261006134324368}
@@ -3842,7 +3842,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 16
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 448cdee3fcd1876488e194deb578282e, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: c5da5053833a64447a04cfee85e9c9ea, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -4690,7 +4690,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 8400000, guid: 448cdee3fcd1876488e194deb578282e, type: 2}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -4893,7 +4893,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1602123456827376}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5632b23a9b5883a4a8c6b76c7dae7cb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b5793da6f655499f81302536237e71b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4219236132055660}
@@ -4955,7 +4955,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1375129284401374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e197c5624bdba44494f92968a26a9f5, type: 3}
+  m_Script: {fileID: 11500000, guid: c894973516e7a4d55ac3ee4bdd16d18b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1260980972635928}

@@ -14,6 +14,14 @@ public class RoomManager : Photon.MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+		if (GameMode.isSinglePlayer) {
+			GetComponent<Spawner> ().enabled = true;
+			GameObject.Find ("LobbyCamera").gameObject.SetActive (false);
+			Instantiate (player, spawnPoint.position, spawnPoint.rotation);
+			this.enabled = false;
+			return;
+		}
+
         Debug.Log(PhotonNetwork.ConnectUsingSettings(versionNum));
 
         // Make sure the random room name doesn't already exist. Temp solution. If there are 1000 rooms then this would get stuck

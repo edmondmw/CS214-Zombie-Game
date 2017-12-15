@@ -15,6 +15,11 @@ public class NetworkPlayer : Photon.MonoBehaviour
 
     private void Awake()
     {
+		if (GameMode.isSinglePlayer) {
+			this.enabled = false;
+			return;
+		}
+
         pv = GetComponent<PhotonView>();
         if (pv.isMine)
         {
@@ -23,6 +28,7 @@ public class NetworkPlayer : Photon.MonoBehaviour
         }
         else
         {
+			transform.Find ("Graphic").gameObject.SetActive (true);
             transform.Find("MainCamera").gameObject.SetActive(false);
             transform.Find("Canvas").gameObject.SetActive(false);
 			transform.Find ("Minimap").gameObject.SetActive (false);

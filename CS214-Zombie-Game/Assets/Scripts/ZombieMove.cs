@@ -67,8 +67,10 @@ public class ZombieMove : MonoBehaviour
     {
         if(PhotonNetwork.connected)
         {
-            if (!PhotonNetwork.isMasterClient)
-                return;
+			if (!PhotonNetwork.isMasterClient) {
+				Debug.Log ("Exit");
+				return;
+			}
         }
         position = transform.position;
         if (playerNumber > 0 && health.currentHealth > 0) {
@@ -149,15 +151,19 @@ public class ZombieMove : MonoBehaviour
 
 
             } else {
+				Debug.Log ("get players");
                 GetPlayers ();
             } 
         } else {
+			GetPlayers ();
+			Debug.Log ("stop");
             nma.Stop ();
         }
     }
 
     private void GetPlayers()
     {
+		PlayerList.ResetPlayerList ();
         players = PlayerList.GetPlayers ();
 
         playerNumber = players.Length;

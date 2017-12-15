@@ -13,7 +13,7 @@ public class Spawner : MonoBehaviour {
 
     private void Start()
     {
-		if (!PhotonNetwork.connected || PhotonNetwork.isMasterClient) 
+		if (GameMode.isSinglePlayer || PhotonNetwork.isMasterClient) 
 		{
 			UpdateText ();
 			StartCoroutine (Spawn ());
@@ -34,7 +34,8 @@ public class Spawner : MonoBehaviour {
 			yield return new WaitForSeconds (4);
 			for (int i = 0; i < wave * 5 + 1; i++) {
 				if (PhotonNetwork.connected && PhotonNetwork.isMasterClient) {
-					PhotonNetwork.Instantiate ("NetworkedZombie", spawnLocations [Random.Range (0, spawnLocations.Length)].transform.position, Quaternion.identity, 0);
+					Debug.Log ("photon instantiate");
+					PhotonNetwork.Instantiate (zombie.name, spawnLocations [Random.Range (0, spawnLocations.Length)].transform.position, Quaternion.identity, 0);
 				} else {
 					Instantiate (zombie, spawnLocations [Random.Range (0, spawnLocations.Length)].transform.position, Quaternion.identity);
 				}
@@ -50,7 +51,6 @@ public class Spawner : MonoBehaviour {
 
     public void UpdateText()
     {
-		Debug.Log ("update text");
         if (PlayerController.players.Count > 0)
         {
             for (int i = 0; i < PlayerController.players.Count; i++)
@@ -62,6 +62,5 @@ public class Spawner : MonoBehaviour {
         {
             Debug.Log("No Player");
         }
-		Debug.Log ("leave ut");
     }
 }
