@@ -78,6 +78,7 @@ public class Health : MonoBehaviour {
         if (!PhotonNetwork.connected && !PhotonNetwork.isMasterClient)
         {
             SceneManager.LoadScene("ZedMenu");
+			Cursor.lockState = CursorLockMode.None;
         }
 
         
@@ -88,6 +89,7 @@ public class Health : MonoBehaviour {
         {
             PhotonNetwork.Disconnect();
             SceneManager.LoadScene(0);
+			Cursor.lockState = CursorLockMode.None;
         }
     }
 
