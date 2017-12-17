@@ -15,9 +15,9 @@ public class ObjectPooler : MonoBehaviour {
 
 	public List<ObjectPoolItem> itemsToPool;
 	public static ObjectPooler SharedInstance;
-	public List<GameObject> pooledObjects;
-	public GameObject objectToPool;
-	public int amountToPool;
+	private List<GameObject> pooledObjects;
+    private GameObject objectToPool;
+    private int amountToPool;
     private GameObject obj;
 
     public bool isMultipleMode;
