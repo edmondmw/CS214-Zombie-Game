@@ -5005,7 +5005,7 @@ MonoBehaviour:
   sprintSpeed: 8
   jumpForce: 200
   damage: 35
-  hitRange: 5
+  hitRange: 4.5
   attackDelay: 1
   isAttacking: 0
   FootStepsSFX: {fileID: 114922948198838202}
