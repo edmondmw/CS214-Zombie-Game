@@ -31,7 +31,7 @@ public class NetworkPlayer : Photon.MonoBehaviour
 			transform.Find ("Graphic").gameObject.SetActive (true);
             transform.Find("MainCamera").gameObject.SetActive(false);
             transform.Find("Canvas").gameObject.SetActive(false);
-			transform.Find ("Minimap").gameObject.SetActive (false);
+            transform.Find("Minimap").Find("MinimapCamera").gameObject.SetActive(false);
             GetComponent<PlayerController>().enabled = false;
             graphicAnim = transform.Find("Graphic").GetComponent<Animator>();
         }

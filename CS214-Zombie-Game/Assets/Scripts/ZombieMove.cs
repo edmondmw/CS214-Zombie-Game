@@ -68,10 +68,12 @@ public class ZombieMove : MonoBehaviour
         if(PhotonNetwork.connected)
         {
 			if (!PhotonNetwork.isMasterClient) {
-				Debug.Log ("Exit");
 				return;
 			}
         }
+
+        // TODO: Change this so you only call in multiplayer and when player joins/dies
+        GetPlayers();
         position = transform.position;
         if (playerNumber > 0 && health.currentHealth > 0) {
             targetNumber = 0;
@@ -87,7 +89,6 @@ public class ZombieMove : MonoBehaviour
                         }
                     }
                 }
-                Debug.Log (minDistance);
                 if (isHit) {
 
                     transform.position = new Vector3 (Mathf.Lerp (position.x, hitPosition.x, t), position.y, Mathf.Lerp (position.z, hitPosition.z, t));
@@ -106,8 +107,6 @@ public class ZombieMove : MonoBehaviour
                             transform.LookAt (direction);
 
                             Attack ();
-
-
                         }
 
                         if (minDistance > maxAttackDistance) {
@@ -120,7 +119,7 @@ public class ZombieMove : MonoBehaviour
 
                         }
 
-                    } else {
+                    } /*else {
                         //Just simple move.
                         transform.Translate (Vector3.forward * idleSpeed);
                         if (timer >= wanderingChangeTime) {
@@ -129,16 +128,18 @@ public class ZombieMove : MonoBehaviour
                         } else {
                             timer += Time.deltaTime;
                         }
-                    }
+                    }*/
 
                     // If player isn't in range, then move randomly. Only want to set new destination when the zombie has stopped
-                    /*else if(nma.velocity.magnitude == 0){
-                        float radius = 50f;
-                        Vector3 point = transform.position + Random.insideUnitSphere * radius;
-                        NavMeshHit nh;
-                        NavMesh.SamplePosition(point, out nh, radius, NavMesh.AllAreas);
-                        nma.destination = nh.position;
-                    } */   
+                    else if(nma.velocity.magnitude == 0 || timer >= wanderingChangeTime)
+                    {
+                        setRandomNavMeshDestination();
+                        timer = 0;
+                    }
+                    else
+                    {
+                        timer += Time.deltaTime;
+                    }
 
                     //Check it is on Ground or on Stairs
                     groundCheck = position + new Vector3 (0, -0.2f, 0); 
@@ -148,15 +149,8 @@ public class ZombieMove : MonoBehaviour
                         isOnGround = !isOnGround;
                     }
                 } 
-
-
-            } else {
-				Debug.Log ("get players");
-                GetPlayers ();
             } 
         } else {
-			GetPlayers ();
-			Debug.Log ("stop");
             nma.Stop ();
         }
     }
@@ -165,7 +159,6 @@ public class ZombieMove : MonoBehaviour
     {
 		PlayerList.ResetPlayerList ();
         players = PlayerList.GetPlayers ();
-
         playerNumber = players.Length;
     }
         
@@ -189,11 +182,22 @@ public class ZombieMove : MonoBehaviour
         }
     }
 
+    // Makes zombie face a random direction
     void RandomDestination ()
     {
         targetPosition = transform.position + new Vector3 (Random.Range (-1f, 1f), 0, Random.Range (-1f, 1f));
         transform.LookAt (targetPosition);
 
+    }
+
+    // Moves to a random destination on the navmesh
+    void setRandomNavMeshDestination()
+    {
+        float radius = 50f;
+        Vector3 point = transform.position + Random.insideUnitSphere * radius;
+        NavMeshHit nh;
+        NavMesh.SamplePosition(point, out nh, radius, NavMesh.AllAreas);
+        nma.destination = nh.position;
     }
 
     IEnumerator BreathSound ()

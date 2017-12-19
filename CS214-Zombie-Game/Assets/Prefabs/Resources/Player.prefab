@@ -3768,7 +3768,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1503048170845164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 435.3, y: 120.4, z: 732.4}
+  m_LocalPosition: {x: 448.06567, y: 115.76634, z: 706.9513}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 4582820157150154}
@@ -3840,7 +3840,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 528
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: c5da5053833a64447a04cfee85e9c9ea, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 2bcaa9922a85db9478266b4d6d9daac4, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -4050,7 +4050,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 4d3edaab5fc274eb58d2e5d55ba7e447, type: 2}
+  - {fileID: 2100000, guid: dc7592842caed2e4885f7ee36b8d7a15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4576,7 +4576,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1339331649855394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c894973516e7a4d55ac3ee4bdd16d18b, type: 3}
+  m_Script: {fileID: 11500000, guid: cac4d1ce879b3c84c8907e9428e1dafc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1503048170845164}
@@ -4634,10 +4634,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1885870096956316}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd598432b6acd40c0af14a2141973c95, type: 3}
+  m_Script: {fileID: 11500000, guid: f5b847dd252b4124aa3f917f58444d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombiePointPrefab: {fileID: 1555740704337484, guid: 5282c48e3e5366d43970d5eb34d9d534,
+  zombiePointPrefab: {fileID: 1155232392010542, guid: 0706588f1b1ce6342b9fb33048c7eadb,
     type: 2}
 --- !u!114 &114306850410592770
 MonoBehaviour:
@@ -4689,7 +4689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 114115964765267390}
-  currentHealth: 1000
+  currentHealth: 100
 --- !u!114 &114369678473868194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4766,7 +4766,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1396389975703500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b5793da6f655499f81302536237e71b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cf3bca2740cbaa45b8f79da8692f834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4995891303890878}
@@ -4933,7 +4933,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 8400000, guid: c5da5053833a64447a04cfee85e9c9ea, type: 2}
+  m_Texture: {fileID: 8400000, guid: 2bcaa9922a85db9478266b4d6d9daac4, type: 2}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -5003,7 +5003,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   sprintSpeed: 8
-  jumpForce: 150
+  jumpForce: 200
   damage: 35
   hitRange: 5
   attackDelay: 1

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class GameMode  
 {
-	public static bool isSinglePlayer = false;
+	public static bool isSinglePlayer = true;
 }

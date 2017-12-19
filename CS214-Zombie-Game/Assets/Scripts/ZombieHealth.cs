@@ -46,10 +46,7 @@ public class ZombieHealth : MonoBehaviour
 
 		}
 
-
         StartCoroutine(DestroyFromNetwork());
-
-
 
         //GameObject.Find("GameManager").GetComponent<GameManager>().decrementNumEnemies();
 
@@ -64,7 +61,7 @@ public class ZombieHealth : MonoBehaviour
     }
 
     [PunRPC]
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector3 attackerPosition)
     {
         GameObject obj=GameObject.FindGameObjectWithTag ("Player");
         beingSlashed.source.Play();
@@ -73,20 +70,18 @@ public class ZombieHealth : MonoBehaviour
         {
             Death();
         }
+        // Push the zombie backwards
         else
         {
-            zm.hitPosition = transform.position + (transform.position - obj.transform.position).normalized * hitBackward;
+            zm.hitPosition = transform.position + (transform.position - attackerPosition).normalized * hitBackward;
             zm.isHit = true;
 
         }
     }
 
-
-
     //The zombie moves against the direction of the object ob hit it.
     public void TakeDamage(int damage, GameObject ob)
 	{
-        Debug.Log("rpc called");
         beingSlashed.source.Play();
 		currentHealth -= damage;
 		if (currentHealth <= 0) {
@@ -102,7 +97,7 @@ public class ZombieHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(disappearTime);
 
-        //PhotonNetwork.Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
         gameObject.SetActive (false);
     }
 }

@@ -34,7 +34,6 @@ public class Spawner : MonoBehaviour {
 			yield return new WaitForSeconds (4);
 			for (int i = 0; i < wave * 5 + 1; i++) {
 				if (PhotonNetwork.connected && PhotonNetwork.isMasterClient) {
-					Debug.Log ("photon instantiate");
 					PhotonNetwork.Instantiate (zombie.name, spawnLocations [Random.Range (0, spawnLocations.Length)].transform.position, Quaternion.identity, 0);
 				} else {
 					Instantiate (zombie, spawnLocations [Random.Range (0, spawnLocations.Length)].transform.position, Quaternion.identity);
