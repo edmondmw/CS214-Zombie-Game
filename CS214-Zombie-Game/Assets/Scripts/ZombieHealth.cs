@@ -10,6 +10,8 @@ public class ZombieHealth : MonoBehaviour
 	public float disappearTime = 10;
     public float hitBackward=5f;
 
+    public int id;
+
 	private Animator anim;
 	private ZombieMove zm;
 
@@ -26,6 +28,8 @@ public class ZombieHealth : MonoBehaviour
 	//Play a random dead animation and destroy the zombie after disappearTime.
 	void Death()
 	{
+        Spawner.numZombies--;
+
 		int deadStyle = Random.Range(0, 3);
 
 		switch (deadStyle)
@@ -42,19 +46,22 @@ public class ZombieHealth : MonoBehaviour
 
 		}
 
-        GameObject.Find("GameManager").GetComponent<GameManager>().decrementNumEnemies();
-        if (PhotonNetwork.connected && PhotonNetwork.isMasterClient)
+        StartCoroutine(DestroyFromNetwork());
+
+        //GameObject.Find("GameManager").GetComponent<GameManager>().decrementNumEnemies();
+
+        /*if (PhotonNetwork.connected && PhotonNetwork.isMasterClient)
         {
             StartCoroutine(DestroyFromNetwork());
         }
         else
         {
             Destroy(gameObject, disappearTime);
-        }
+        }*/
     }
 
     [PunRPC]
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector3 attackerPosition)
     {
         GameObject obj=GameObject.FindGameObjectWithTag ("Player");
         beingSlashed.source.Play();
@@ -63,20 +70,18 @@ public class ZombieHealth : MonoBehaviour
         {
             Death();
         }
+        // Push the zombie backwards
         else
         {
-            zm.hitPosition = transform.position + (transform.position - obj.transform.position).normalized * hitBackward;
+            zm.hitPosition = transform.position + (transform.position - attackerPosition).normalized * hitBackward;
             zm.isHit = true;
 
         }
     }
 
-
-
     //The zombie moves against the direction of the object ob hit it.
     public void TakeDamage(int damage, GameObject ob)
 	{
-        Debug.Log("rpc called");
         beingSlashed.source.Play();
 		currentHealth -= damage;
 		if (currentHealth <= 0) {
@@ -93,6 +98,7 @@ public class ZombieHealth : MonoBehaviour
         yield return new WaitForSeconds(disappearTime);
 
         PhotonNetwork.Destroy(gameObject);
+        gameObject.SetActive (false);
     }
 }
 

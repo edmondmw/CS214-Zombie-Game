@@ -54,6 +54,14 @@ public class GameManager : MonoBehaviour
             if (j == enemySpawns.Length)
                 j = 0;
             PhotonNetwork.Instantiate(enemy.name, enemySpawns[j].position, enemySpawns[j].rotation, 0);
+            /* Use it to replace Instantiate():
+             * enemy = ObjectPooler.SharedInstance.GetPooledObject("Enemy"); 
+            if (enemy != null) {
+                enemy.transform.position = enemySpawns[0].transform.position;
+                enemy.transform.rotation = enemySpawns[0].transform.rotation;
+                enemy.GetComponent<ZombieHealth> ().currentHealth = enemy.GetComponent<ZombieHealth> ().startingHealth;
+                enemy.SetActive (true);
+            }*/
         }
         waveSize *= 2;
     }

@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - NetworkedEnemy
   - Enemy
+  - Stair
+  - Box
+
   layers:
   - Default
   - TransparentFX
@@ -15,8 +18,8 @@ TagManager:
   - Water
   - UI
   - 
-  - 
   - Stair
+  - 
   - 
   - 
   - 

@@ -14,6 +14,14 @@ public class RoomManager : Photon.MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
+		if (GameMode.isSinglePlayer) {
+			GetComponent<Spawner> ().enabled = true;
+			GameObject.Find ("LobbyCamera").gameObject.SetActive (false);
+			Instantiate (player, spawnPoint.position, spawnPoint.rotation);
+			this.enabled = false;
+			return;
+		}
+
         Debug.Log(PhotonNetwork.ConnectUsingSettings(versionNum));
 
         // Make sure the random room name doesn't already exist. Temp solution. If there are 1000 rooms then this would get stuck
@@ -48,10 +56,10 @@ public class RoomManager : Photon.MonoBehaviour {
         Debug.Log("Joined room");
         // Disable the lobby camera once we join a room since we can use the first person camera
         GameObject.Find("LobbyCamera").gameObject.SetActive(false);
-        GetComponent<GameManager>().enabled = true;
+        GetComponent<Spawner>().enabled = true;
         isConnected = false;
         PhotonNetwork.automaticallySyncScene = true;
-        PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
+		PhotonNetwork.Instantiate(player.name, spawnPoint.position, spawnPoint.rotation, 0);
         //aZombie.GetComponent<ZombieMove>().players[0] = aPlayer;
     }
 

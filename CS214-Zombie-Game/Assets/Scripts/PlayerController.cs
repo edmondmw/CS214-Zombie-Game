@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
+    public static List<PlayerController> players = new List<PlayerController>();
+
 
     public float walkSpeed = 5f;
     public float sprintSpeed = 10f;
@@ -26,6 +29,8 @@ public class PlayerController : MonoBehaviour {
     public Sound FootStepsSFX;
     public Sound SwingsSFX;
 
+    public Text wave;
+
 
     void Start ()
     {
@@ -35,8 +40,8 @@ public class PlayerController : MonoBehaviour {
         anim = transform.Find("MainCamera").Find("Arms").GetComponent<Animator>();
         nextAttack = Time.time;
 
-        // Audio
-
+        players.Add(this);
+        UpdateWave(1);
     }
 
     private void FixedUpdate()
@@ -122,19 +127,27 @@ public class PlayerController : MonoBehaviour {
         {
             if(hit.transform.CompareTag("Enemy"))
             {
-				// TODO: Make health an abstract class and zombie health a child
-                hit.transform.GetComponent<ZombieHealth>().TakeDamage(damage,gameObject);
-				Debug.Log(hit.transform.GetComponent<ZombieHealth>().currentHealth);
-            }
-
-            if(hit.transform.CompareTag("NetworkedEnemy"))
-            {
-                hit.transform.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);
-            }
+                // TODO: Make health an abstract class and zombie health a child
+                if (GameMode.isSinglePlayer)
+                {
+                    hit.transform.GetComponent<ZombieHealth>().TakeDamage(damage, gameObject);
+                }
+                else
+                {
+                    hit.transform.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage, transform.position);
+                }
+            }     
         }
     }
 
     void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            grounded = true;
+        }
+    }
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -189,5 +202,9 @@ public class PlayerController : MonoBehaviour {
     private void SwingSound()
     {
         SwingsSFX.source.Play();
+    }
+    public void UpdateWave(int num)
+    {
+        wave.text = num.ToString();
     }
 }
